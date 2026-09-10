@@ -79,12 +79,146 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #6366f1;
         }
+
+        /* ================= MEJORAS VISUALES Y RESPONSIVAS ================= */
+        @media (max-width: 767px) {
+            aside#main-sidebar {
+                display: flex !important;
+                position: fixed;
+                inset: 0 auto 0 0;
+                width: min(82vw, 20rem) !important;
+                z-index: 50;
+                transform: translateX(-105%);
+                visibility: hidden;
+                transition: transform 0.32s cubic-bezier(.22,.61,.36,1), visibility 0s linear .32s;
+                box-shadow: 18px 0 45px rgba(0,0,0,.32);
+            }
+            aside#main-sidebar.mobile-sidebar-open {
+                transform: translateX(0);
+                visibility: visible;
+                transition: transform 0.32s cubic-bezier(.22,.61,.36,1), visibility 0s linear 0s;
+            }
+            #mobile-sidebar-backdrop {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity .28s ease, visibility 0s linear .28s;
+            }
+            #mobile-sidebar-backdrop.mobile-backdrop-open {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transition: opacity .28s ease, visibility 0s linear 0s;
+            }
+        }
+
+        /* Modo claro: conserva la estética Nexus, pero invierte la superficie para una lectura limpia. */
+        html.light-mode body { background: #f3f5f9 !important; color: #172033 !important; }
+        html.light-mode .bg-nexus-900 { background-color: #eef1f6 !important; }
+        html.light-mode .bg-nexus-800 { background-color: #ffffff !important; }
+        html.light-mode .bg-nexus-700 { background-color: #e7ebf2 !important; }
+        html.light-mode .border-nexus-700, html.light-mode .border-nexus-700\/60, html.light-mode .border-nexus-700\/65, html.light-mode .border-nexus-700\/80 { border-color: #d6dce7 !important; }
+        html.light-mode .border-nexus-600 { border-color: #c7ceda !important; }
+        html.light-mode .text-slate-100, html.light-mode .text-slate-200 { color: #182235 !important; }
+        html.light-mode .text-slate-300 { color: #334155 !important; }
+        html.light-mode .text-slate-400 { color: #64748b !important; }
+        html.light-mode .text-slate-500 { color: #718096 !important; }
+        html.light-mode .hover\:bg-nexus-700\/50:hover { background-color: #e7ebf2 !important; }
+        html.light-mode .bg-nexus-900\/40 { background-color: #e9edf3 !important; }
+        html.light-mode .bg-nexus-800\/80 { background-color: rgba(255,255,255,.86) !important; }
+        html.light-mode ::-webkit-scrollbar-track { background: #eef1f6; }
+        html.light-mode ::-webkit-scrollbar-thumb { background: #c2cad7; }
+        html.light-mode input, html.light-mode select { color: #182235 !important; }
+        html.light-mode .sidebar-btn.text-slate-400 { color: #64748b !important; }
+        html.light-mode .sidebar-btn:hover { color: #182235 !important; }
+        html.light-mode .bg-black\/70 { background-color: rgba(15,23,42,.48) !important; }
+        html.light-mode .bg-black\/75 { background-color: rgba(15,23,42,.52) !important; }
+
+        .dashboard-filter-btn {
+            display:flex; align-items:center; gap:.4rem; padding:.4rem .65rem; border-radius:.7rem;
+            border:1px solid #32425c; background:rgba(31,41,61,.72); color:#94a3b8;
+            font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; transition:all .2s ease;
+        }
+        .dashboard-filter-btn:hover { color:#fff; border-color:#6366f1; background:rgba(99,102,241,.14); }
+        .dashboard-filter-btn.active { color:#c7d2fe; border-color:#6366f1; background:rgba(99,102,241,.20); box-shadow:0 0 0 1px rgba(99,102,241,.12); }
+        html.light-mode .dashboard-filter-btn { background:#fff; border-color:#d6dce7; color:#64748b; }
+        html.light-mode .dashboard-filter-btn.active { color:#4338ca; border-color:#6366f1; background:#eef2ff; }
+
+        .view-panel {
+            will-change: opacity, transform;
+        }
+        .view-panel.view-enter {
+            animation: nexusViewEnter .42s cubic-bezier(.16,1,.3,1) both;
+        }
+        @keyframes nexusViewEnter {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ESCALA GLOBAL DEL 10%: Aumenta tipografías y elementos base mediante REM */
+        html {
+            font-size: 110% !important;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            zoom: 1;
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+        }
+        .app-shell {
+            width: 100%;
+            min-height: 100vh;
+        }
+        .dashboard-scope-control {
+            position:relative; display:flex; align-items:center; gap:0; border-radius:.75rem;
+            border:1px solid #32425c; background:rgba(31,41,61,.72);
+            box-shadow:0 0 0 1px rgba(99,102,241,.06); overflow:visible;
+        }
+        .dashboard-scope-toggle, .dashboard-year-trigger {
+            display:flex; align-items:center; gap:.45rem; padding:.42rem .7rem;
+            border:0; background:transparent; color:#c7d2fe; font-size:10px; font-weight:800;
+            text-transform:uppercase; letter-spacing:.04em; transition:all .2s ease;
+        }
+        .dashboard-scope-toggle { border-radius:.75rem; }
+        .dashboard-scope-toggle:hover, .dashboard-year-trigger:hover { color:#fff; background:rgba(99,102,241,.16); }
+        .dashboard-scope-control .scope-pill {
+            min-width:42px; text-align:center; padding:.16rem .38rem; border-radius:.45rem;
+            background:rgba(99,102,241,.18); color:#a5b4fc;
+        }
+        .dashboard-year-trigger { display:none; cursor:pointer; border-left:1px solid rgba(50,66,92,.8); }
+        .dashboard-year-trigger.visible { display:flex; }
+        .dashboard-year-menu {
+            position:absolute; right:0; top:calc(100% + .5rem); min-width:120px; max-height:240px;
+            overflow-y:auto; padding:.35rem; border:1px solid #32425c; border-radius:.8rem;
+            background:#111827; box-shadow:0 18px 40px rgba(0,0,0,.4); z-index:70;
+        }
+        .dashboard-year-menu.hidden { display:none; }
+        .dashboard-year-option {
+            width:100%; display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+            padding:.55rem .65rem; border-radius:.55rem; color:#cbd5e1; font-size:10px; font-weight:800;
+            text-align:left; transition:background .15s ease,color .15s ease;
+        }
+        .dashboard-year-option:hover { background:rgba(99,102,241,.16); color:#fff; }
+        .dashboard-year-option.active { background:rgba(99,102,241,.22); color:#a5b4fc; }
+        .section-icon-box {
+            width:44px !important; height:44px !important; min-width:44px !important;
+            padding:0 !important; display:flex !important; align-items:center !important;
+            justify-content:center !important; flex-shrink:0 !important;
+        }
+        @media (max-width: 640px) {
+            header .dashboard-filter-label { display:none; }
+            .dashboard-scope-toggle .scope-label { display:none; }
+            .dashboard-scope-toggle, .dashboard-year-trigger { padding:.42rem .55rem; }
+        }
     </style>
 </head>
 <body class="bg-nexus-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white" data-source="12">
 
     <!-- Shell Principal -->
-    <div class="flex h-screen overflow-hidden">
+    <div class="app-shell flex min-h-screen w-full">
 
         <!-- Sidebar de Navegación Lateral -->
         <aside id="main-sidebar" class="w-64 bg-nexus-800 border-r border-nexus-700/60 hidden md:flex flex-col z-20 transition-all duration-300">
@@ -125,6 +259,8 @@
             </div>
         </aside>
 
+        <div id="mobile-sidebar-backdrop" onclick="closeMobileSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-[2px] z-40 md:hidden"></div>
+
         <!-- Contenedor Derecho -->
         <div class="flex-1 flex flex-col h-screen overflow-hidden">
             
@@ -139,13 +275,26 @@
                         <p class="text-[11px] text-slate-400">Panel operativo centralizado.</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <span id="header-active-badge" class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Modo Pro</span>
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="flex items-center gap-2">
+                        <div id="dashboard-scope-control" class="dashboard-scope-control">
+                            <button id="dashboard-scope-toggle" onclick="toggleDashboardScope()" class="dashboard-scope-toggle" title="Cambiar entre vista global y vista por año">
+                                <i id="dashboard-scope-icon" class="fa-solid fa-globe"></i>
+                                <span class="scope-label">Vista</span>
+                                <span id="dashboard-scope-label" class="scope-pill">Global</span>
+                            </button>
+                            <button id="dashboard-year-trigger" onclick="toggleDashboardYearMenu(event)" class="dashboard-year-trigger" title="Seleccionar año">
+                                <span id="dashboard-year-label">2026</span>
+                                <i id="dashboard-year-chevron" class="fa-solid fa-chevron-down text-[9px]"></i>
+                            </button>
+                            <div id="dashboard-year-menu" class="dashboard-year-menu hidden"></div>
+                        </div>
+                    </div>
                 </div>
             </header>
 
             <!-- Área de Vistas Desplazables -->
-            <main class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+            <main id="app-scroll" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 scroll-smooth">
 
                 <!-- ================= VISTA 1: DASHBOARD GLOBAL ================= -->
                 <div id="view-dashboard" class="space-y-6 view-panel">
@@ -156,7 +305,7 @@
                                 <h3 id="dash-kpi-ingresos" class="text-2xl font-black text-teal-400 mt-1">$0,00</h3>
                                 <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-teal-300 transition-colors">Ver todos <i class="fa-solid fa-arrow-right ml-1"></i></span>
                             </div>
-                            <div class="bg-teal-500/15 text-teal-400 p-3 rounded-xl border border-teal-500/30 group-hover:bg-teal-500/30 transition-all">
+                            <div class="bg-teal-500/15 text-teal-400 p-3 rounded-xl section-icon-box border border-teal-500/30 group-hover:bg-teal-500/30 transition-all">
                                 <i class="fa-solid fa-arrow-trend-up text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
@@ -167,7 +316,7 @@
                                 <h3 id="dash-kpi-gastos" class="text-2xl font-black text-rose-400 mt-1">$0,00</h3>
                                 <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-rose-300 transition-colors">Ver todos <i class="fa-solid fa-arrow-right ml-1"></i></span>
                             </div>
-                            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl border border-rose-500/30 group-hover:bg-rose-500/30 transition-all">
+                            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl section-icon-box border border-rose-500/30 group-hover:bg-rose-500/30 transition-all">
                                 <i class="fa-solid fa-arrow-trend-down text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-rose-500"></div>
@@ -178,7 +327,7 @@
                                 <h3 id="dash-kpi-cajas" class="text-2xl font-black text-emerald-400 mt-1">$0,00</h3>
                                 <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-emerald-300 transition-colors">Ver todos <i class="fa-solid fa-arrow-right ml-1"></i></span>
                             </div>
-                            <div class="bg-emerald-500/15 text-emerald-400 p-3 rounded-xl border border-emerald-500/30 group-hover:bg-emerald-500/30 transition-all">
+                            <div class="bg-emerald-500/15 text-emerald-400 p-3 rounded-xl section-icon-box border border-emerald-500/30 group-hover:bg-emerald-500/30 transition-all">
                                 <i class="fa-solid fa-vault text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
@@ -193,7 +342,7 @@
                             <p id="dash-balance-explanation" class="text-[11px] text-slate-400 mt-1 max-w-xl leading-snug">Calculando el rendimiento financiero general de la plataforma...</p>
                             <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-indigo-300 transition-colors">Ver análisis detallado y gráfico <i class="fa-solid fa-arrow-right ml-1"></i></span>
                         </div>
-                        <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl border border-indigo-500/30 group-hover:bg-indigo-500/30 transition-all shrink-0 ml-4">
+                        <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl section-icon-box border border-indigo-500/30 group-hover:bg-indigo-500/30 transition-all shrink-0 ml-4">
                             <i class="fa-solid fa-scale-balanced text-lg"></i>
                         </div>
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
@@ -205,7 +354,7 @@
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-chart-column text-indigo-400 mr-2"></i> Evolución Histórica de Ahorros</h3>
+                                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-chart-line text-indigo-400 mr-2"></i> Evolución Histórica de Ahorros</h3>
                                 </div>
                                 <div class="h-64 relative">
                                     <canvas id="mainDashboardChart"></canvas>
@@ -229,31 +378,27 @@
 
                     <!-- Métricas Extra -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group relative pb-14 overflow-hidden">
+                        <div onclick="switchTab('pasivos')" class="bg-nexus-800 border border-nexus-700/80 p-5 rounded-2xl shadow-sm relative overflow-hidden flex items-center justify-between cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group">
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400">Estado General de Deudas</span>
+                                <h3 id="dash-total-debts" class="text-2xl font-black text-amber-400 mt-1">$0,00</h3>
+                                <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-amber-300 transition-colors">Total pasivos pendientes <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                            </div>
+                            <div class="bg-amber-500/15 text-amber-400 p-3 rounded-xl section-icon-box border border-amber-500/30 group-hover:bg-amber-500/30 transition-all">
+                                <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
+                            </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
-                            <div>
-                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-file-invoice-dollar text-amber-400 mr-2"></i> Estado General de Deudas</h3>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs text-slate-400">Total Pasivos Pendientes:</span>
-                                    <span id="dash-total-debts" class="text-sm font-black text-amber-400">$0,00</span>
-                                </div>
-                            </div>
-                            <button onclick="switchTab('pasivos')" class="absolute bottom-6 right-6 text-[10px] text-slate-400 hover:text-amber-300 transition-colors flex items-center font-bold uppercase tracking-wider">
-                                <span>Gestionar</span> <i class="fa-solid fa-arrow-right ml-1"></i>
-                            </button>
                         </div>
-                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/10 group relative pb-14 overflow-hidden">
-                            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
+                        <div onclick="switchTab('periodos')" class="bg-nexus-800 border border-nexus-700/80 p-5 rounded-2xl shadow-sm relative overflow-hidden flex items-center justify-between cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/10 group">
                             <div>
-                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-calendar-check text-indigo-400 mr-2"></i> Resumen de Actividad</h3>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs text-slate-400">Periodos Registrados:</span>
-                                    <span id="dash-total-periods-count" class="text-sm font-black text-indigo-400">0</span>
-                                </div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-400">Resumen de Actividad</span>
+                                <h3 id="dash-total-periods-count" class="text-2xl font-black text-indigo-400 mt-1">0</h3>
+                                <span class="text-[10px] text-slate-400 mt-2 inline-block group-hover:text-indigo-300 transition-colors">Periodos registrados <i class="fa-solid fa-arrow-right ml-1"></i></span>
                             </div>
-                            <button onclick="switchTab('periodos')" class="absolute bottom-6 right-6 text-[10px] text-slate-400 hover:text-indigo-300 transition-colors flex items-center font-bold uppercase tracking-wider">
-                                <span>Gestionar</span> <i class="fa-solid fa-arrow-right ml-1"></i>
-                            </button>
+                            <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl section-icon-box border border-indigo-500/30 group-hover:bg-indigo-500/30 transition-all">
+                                <i class="fa-solid fa-calendar-check text-lg"></i>
+                            </div>
+                            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
                         </div>
                     </div>
                 </div>
@@ -262,7 +407,7 @@
                 <div id="view-periodos" class="space-y-6 view-panel hidden">
                     <!-- Botón Volver específico para Móvil y Escritorio en la vista de Periodos -->
                     <div class="flex items-center justify-between">
-                        <button onclick="switchTab('dashboard')" class="bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
+                        <button onclick="switchTab('dashboard')" class="md:hidden bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
                             <i class="fa-solid fa-arrow-left"></i>
                             <span>Volver al Dashboard</span>
                         </button>
@@ -323,7 +468,7 @@
                                 <span class="text-[10px] font-extrabold uppercase tracking-wider text-teal-400">Ingresos del Mes</span>
                                 <h3 id="detail-kpi-ingresos" class="text-2xl font-black text-teal-400 mt-1">$0,00</h3>
                             </div>
-                            <div class="bg-teal-500/15 text-teal-400 p-3 rounded-xl border border-teal-500/30 group-hover:bg-teal-500/30 transition-all">
+                            <div class="bg-teal-500/15 text-teal-400 p-3 rounded-xl section-icon-box border border-teal-500/30 group-hover:bg-teal-500/30 transition-all">
                                 <i class="fa-solid fa-arrow-trend-up text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
@@ -333,7 +478,7 @@
                                 <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-400">Gastos del Mes</span>
                                 <h3 id="detail-kpi-gastos" class="text-2xl font-black text-rose-400 mt-1">$0,00</h3>
                             </div>
-                            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl border border-rose-500/30 group-hover:bg-rose-500/30 transition-all">
+                            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl section-icon-box border border-rose-500/30 group-hover:bg-rose-500/30 transition-all">
                                 <i class="fa-solid fa-arrow-trend-down text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-rose-500"></div>
@@ -343,7 +488,7 @@
                                 <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-400">Disponible del Mes</span>
                                 <h3 id="detail-available-amount" class="text-2xl font-black text-slate-100 mt-1">$0,00</h3>
                             </div>
-                            <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl border border-indigo-500/30 group-hover:bg-indigo-500/30 transition-all">
+                            <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl section-icon-box border border-indigo-500/30 group-hover:bg-indigo-500/30 transition-all">
                                 <i class="fa-solid fa-wallet text-lg"></i>
                             </div>
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
@@ -355,7 +500,7 @@
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
                             <div class="flex justify-between items-center">
                                 <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-arrow-trend-up text-teal-400 mr-2"></i> Detalle de Ingresos</h3>
-                                <span id="detail-total-income-block" class="text-xs font-black text-teal-400 bg-teal-500/15 px-3 py-1.5 rounded-xl border border-teal-500/30 uppercase">Total: $0,00</span>
+                                <div class="flex items-center gap-2"><button onclick="openCategoryDetailsModal('income')" class="text-[10px] font-extrabold uppercase tracking-wider text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 px-2.5 py-1.5 rounded-xl border border-teal-500/30 transition-all"><i class="fa-solid fa-chart-line mr-1"></i> Detalles</button><span id="detail-total-income-block" class="text-xs font-black text-teal-400 bg-teal-500/15 px-3 py-1.5 rounded-xl border border-teal-500/30 uppercase">Total: $0,00</span></div>
                             </div>
                             <div id="detail-income-list" class="space-y-2 max-h-44 overflow-y-auto pr-1 flex flex-col"></div>
                         </div>
@@ -364,7 +509,7 @@
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-rose-500"></div>
                             <div class="flex justify-between items-center">
                                 <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-arrow-trend-down text-rose-400 mr-2"></i> Detalle de Gastos</h3>
-                                <span id="detail-total-expense-block" class="text-xs font-black text-rose-400 bg-rose-500/15 px-3 py-1.5 rounded-xl border border-rose-500/30 uppercase">Total: $0,00</span>
+                                <div class="flex items-center gap-2"><button onclick="openCategoryDetailsModal('expense')" class="text-[10px] font-extrabold uppercase tracking-wider text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1.5 rounded-xl border border-rose-500/30 transition-all"><i class="fa-solid fa-chart-line mr-1"></i> Detalles</button><span id="detail-total-expense-block" class="text-xs font-black text-rose-400 bg-rose-500/15 px-3 py-1.5 rounded-xl border border-rose-500/30 uppercase">Total: $0,00</span></div>
                             </div>
                             <div id="detail-expense-list" class="space-y-2 max-h-44 overflow-y-auto pr-1 flex flex-col"></div>
                         </div>
@@ -521,7 +666,7 @@
                 <div id="view-pasivos" class="space-y-6 view-panel hidden">
                     <!-- Botón Volver para la sección Pasivos -->
                     <div class="flex items-center justify-between">
-                        <button onclick="switchTab('dashboard')" class="bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
+                        <button onclick="switchTab('dashboard')" class="md:hidden bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
                             <i class="fa-solid fa-arrow-left"></i>
                             <span>Volver al Dashboard</span>
                         </button>
@@ -567,7 +712,7 @@
                 <div id="view-cajas" class="space-y-6 view-panel hidden">
                     <!-- Botón Volver para la sección Cajas de Ahorro -->
                     <div class="flex items-center justify-between">
-                        <button onclick="switchTab('dashboard')" class="bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
+                        <button onclick="switchTab('dashboard')" class="md:hidden bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
                             <i class="fa-solid fa-arrow-left"></i>
                             <span>Volver al Dashboard</span>
                         </button>
@@ -628,7 +773,7 @@
                 <div id="view-ajustes" class="space-y-6 view-panel hidden">
                     <!-- Botón Volver para la sección Ajustes -->
                     <div class="flex items-center justify-between">
-                        <button onclick="switchTab('dashboard')" class="bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
+                        <button onclick="switchTab('dashboard')" class="md:hidden bg-nexus-800 hover:bg-nexus-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-nexus-700 flex items-center space-x-2 shadow-sm">
                             <i class="fa-solid fa-arrow-left"></i>
                             <span>Volver al Dashboard</span>
                         </button>
@@ -743,6 +888,20 @@
         </div>
     </div>
 
+    <!-- MODAL DE DETALLE POR CATEGORÍAS -->
+    <div id="category-details-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-nexus-800 border border-nexus-700 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
+            <div class="p-5 border-b border-nexus-700 flex justify-between items-center bg-nexus-900">
+                <h3 id="category-details-title" class="text-sm font-black text-slate-100 uppercase tracking-wider">Detalle por categorías</h3>
+                <button onclick="closeCategoryDetailsModal()" class="text-slate-400 hover:text-white p-1.5"><i class="fa-solid fa-xmark text-base"></i></button>
+            </div>
+            <div id="category-details-content" class="p-6 overflow-y-auto space-y-4 flex-1"></div>
+            <div class="p-4 border-t border-nexus-700 bg-nexus-900 text-right">
+                <button onclick="closeCategoryDetailsModal()" class="bg-nexus-700 hover:bg-nexus-600 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN (ADVERTENCIA ACCIDENTAL) -->
     <div id="delete-confirm-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-nexus-800 border border-rose-500/50 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl p-6 space-y-4 text-center relative">
@@ -812,6 +971,10 @@
         let chartInstance = null;
         let balanceChartInstance = null;
         let pendingDeleteCallback = null;
+        let dashboardScope = localStorage.getItem('nexus_dashboard_scope') || 'global';
+        let dashboardYear = localStorage.getItem('nexus_dashboard_year') || String(new Date().getFullYear());
+        let themeMode = localStorage.getItem('nexus_theme') || 'dark';
+        let categoryChartInstance = null;
 
         function getCurrentYearMonth() {
             const now = new Date();
@@ -832,6 +995,8 @@
                 yearInput.value = now.getFullYear();
             }
             saveDB();
+            applyTheme(themeMode);
+            initDashboardFilters();
             updateUserNameDisplay();
             switchTab('dashboard');
         });
@@ -915,21 +1080,30 @@
             }
         }
 
+        function scrollAppToTop(behavior = 'smooth') {
+            const appScroll = document.getElementById('app-scroll');
+            if (appScroll) appScroll.scrollTo({ top: 0, behavior });
+        }
+
         function switchTab(tabId) {
-            document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+            scrollAppToTop('smooth');
+            document.querySelectorAll('.view-panel').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('view-enter');
+            });
             document.querySelectorAll('.sidebar-btn').forEach(el => {
                 el.classList.remove('bg-indigo-600', 'text-white', 'shadow-lg', 'shadow-indigo-600/20');
                 el.classList.add('text-slate-400', 'hover:bg-nexus-700/50', 'hover:text-slate-200');
             });
 
-            const sidebar = document.querySelector('aside');
-            if (window.innerWidth < 768 && !sidebar.classList.contains('hidden')) {
-                sidebar.classList.add('hidden');
-                sidebar.classList.remove('flex', 'absolute', 'inset-y-0', 'left-0', 'z-50');
-            }
+            if (window.innerWidth < 768) closeMobileSidebar();
 
             const panel = document.getElementById(`view-${tabId}`);
-            if (panel) panel.classList.remove('hidden');
+            if (panel) {
+                panel.classList.remove('hidden');
+                void panel.offsetWidth;
+                panel.classList.add('view-enter');
+            }
 
             const btn = document.getElementById(`tab-${tabId}`);
             if (btn) {
@@ -954,19 +1128,110 @@
         }
 
         function toggleMobileSidebar() {
-            const sidebar = document.querySelector('aside');
+            const sidebar = document.getElementById('main-sidebar');
             if (window.innerWidth >= 768) {
                 sidebar.classList.toggle('sidebar-collapsed');
-            } else {
-                if (sidebar.classList.contains('hidden')) {
-                    sidebar.classList.remove('hidden');
-                    sidebar.classList.add('flex', 'absolute', 'inset-y-0', 'left-0', 'z-50');
-                } else {
-                    sidebar.classList.add('hidden');
-                    sidebar.classList.remove('flex', 'absolute', 'inset-y-0', 'left-0', 'z-50');
-                }
+                return;
             }
+            const isOpen = sidebar.classList.contains('mobile-sidebar-open');
+            if (isOpen) closeMobileSidebar();
+            else openMobileSidebar();
         }
+
+        function openMobileSidebar() {
+            if (window.innerWidth >= 768) return;
+            const sidebar = document.getElementById('main-sidebar');
+            const backdrop = document.getElementById('mobile-sidebar-backdrop');
+            sidebar.classList.add('mobile-sidebar-open');
+            backdrop.classList.add('mobile-backdrop-open');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('main-sidebar');
+            const backdrop = document.getElementById('mobile-sidebar-backdrop');
+            if (!sidebar || !backdrop) return;
+            sidebar.classList.remove('mobile-sidebar-open');
+            backdrop.classList.remove('mobile-backdrop-open');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function applyTheme(mode) {
+            themeMode = 'dark';
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light-mode');
+            localStorage.setItem('nexus_theme', 'dark');
+        }
+
+        function getDashboardPeriodKeys() {
+            const keys = Object.keys(db.periods || {});
+            if (dashboardScope !== 'year') return keys;
+            return keys.filter(ym => ym.startsWith(String(dashboardYear) + '-'));
+        }
+
+        function initDashboardFilters() {
+            const years = [...new Set(Object.keys(db.periods || {}).map(ym => ym.split('-')[0]))].sort().reverse();
+            if (!years.includes(String(new Date().getFullYear()))) years.push(String(new Date().getFullYear()));
+            if (!years.includes(String(dashboardYear))) dashboardYear = years[0] || String(new Date().getFullYear());
+            const menu = document.getElementById('dashboard-year-menu');
+            if (menu) {
+                menu.innerHTML = years.map(y => `
+                    <button type="button" class="dashboard-year-option ${String(y) === String(dashboardYear) ? 'active' : ''}" onclick="setDashboardYear('${y}')">
+                        <span>${y}</span>
+                        ${String(y) === String(dashboardYear) ? '<i class="fa-solid fa-check text-[9px]"></i>' : ''}
+                    </button>
+                `).join('');
+            }
+            updateDashboardFilterUI();
+        }
+
+        function updateDashboardFilterUI() {
+            const toggle = document.getElementById('dashboard-scope-toggle');
+            const icon = document.getElementById('dashboard-scope-icon');
+            const label = document.getElementById('dashboard-scope-label');
+            const yearTrigger = document.getElementById('dashboard-year-trigger');
+            const yearLabel = document.getElementById('dashboard-year-label');
+            const menu = document.getElementById('dashboard-year-menu');
+            if (toggle) toggle.title = dashboardScope === 'global' ? 'Cambiar a vista por año' : 'Volver a vista global';
+            if (icon) icon.className = dashboardScope === 'global' ? 'fa-solid fa-globe' : 'fa-solid fa-calendar-days';
+            if (label) label.innerText = dashboardScope === 'global' ? 'Global' : 'Año';
+            if (yearLabel) yearLabel.innerText = dashboardYear;
+            if (yearTrigger) yearTrigger.classList.toggle('visible', dashboardScope === 'year');
+            if (menu && dashboardScope !== 'year') menu.classList.add('hidden');
+        }
+
+        function toggleDashboardYearMenu(event) {
+            if (event) event.stopPropagation();
+            if (dashboardScope !== 'year') return;
+            const menu = document.getElementById('dashboard-year-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function setDashboardScope(scope) {
+            dashboardScope = scope === 'year' ? 'year' : 'global';
+            localStorage.setItem('nexus_dashboard_scope', dashboardScope);
+            initDashboardFilters();
+            renderDashboard();
+        }
+
+        function toggleDashboardScope() {
+            setDashboardScope(dashboardScope === 'global' ? 'year' : 'global');
+        }
+
+        function setDashboardYear(year) {
+            dashboardYear = String(year);
+            localStorage.setItem('nexus_dashboard_year', dashboardYear);
+            const menu = document.getElementById('dashboard-year-menu');
+            if (menu) menu.classList.add('hidden');
+            initDashboardFilters();
+            renderDashboard();
+        }
+
+        document.addEventListener('click', function(event) {
+            const control = document.getElementById('dashboard-scope-control');
+            const menu = document.getElementById('dashboard-year-menu');
+            if (control && menu && !control.contains(event.target)) menu.classList.add('hidden');
+        });
 
         function formatCurrencyInput(input) {
             let val = input.value.replace(/\D/g, '');
@@ -995,6 +1260,13 @@
         }
 
         // ================= MODAL DE BALANCE EXPLICATIVO GLOBAL =================
+        function resetModalScroll(contentId) {
+            const content = document.getElementById(contentId);
+            if (content) content.scrollTop = 0;
+            const modal = content ? content.closest('[id$="-modal"]') : null;
+            if (modal) modal.scrollTop = 0;
+        }
+
         function openBalanceModal() {
             const modal = document.getElementById('dashboard-modal');
             const titleEl = document.getElementById('dashboard-modal-title');
@@ -1004,7 +1276,7 @@
             titleEl.innerText = "Análisis Detallado del Balance Explicativo Global";
 
             let totalInc = 0, totalExp = 0;
-            Object.keys(db.periods).forEach(ym => {
+            getDashboardPeriodKeys().forEach(ym => {
                 const p = db.periods[ym];
                 if (p.fixedBlock && p.fixedBlock.plannedRecords) {
                     p.fixedBlock.plannedRecords.forEach(r => {
@@ -1060,7 +1332,7 @@
                     </div>
 
                     <div class="bg-nexus-900 p-4 rounded-xl border border-nexus-700 space-y-3">
-                        <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-chart-column text-indigo-400 mr-2"></i> Comparativa Global de Ingresos vs Gastos</h4>
+                        <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-chart-line text-indigo-400 mr-2"></i> Evolución Global de Ingresos vs Gastos</h4>
                         <div class="h-64 sm:h-56 relative">
                             <canvas id="balanceExplanationChart"></canvas>
                         </div>
@@ -1074,13 +1346,20 @@
                 const ctx = document.getElementById('balanceExplanationChart').getContext('2d');
                 if (balanceChartInstance) balanceChartInstance.destroy();
                 balanceChartInstance = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: {
-                        labels: ['Ingresos Totales', 'Gastos Totales', 'Balance Neto'],
+                        labels: [['Ingresos', 'Totales'], ['Gastos', 'Totales'], ['Balance', 'Neto']],
                         datasets: [{
                             data: [totalInc, totalExp, netBalance],
-                            backgroundColor: ['#2dd4bf', '#fb7185', '#6366f1'],
-                            borderRadius: 6
+                            borderColor: '#818cf8',
+                            backgroundColor: 'rgba(99,102,241,0.12)',
+                            pointBackgroundColor: ['#2dd4bf', '#fb7185', '#6366f1'],
+                            pointBorderColor: '#111827',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            tension: 0.35,
+                            fill: true
                         }]
                     },
                     options: {
@@ -1093,8 +1372,16 @@
                                 ticks: { 
                                     color: '#94a3b8', 
                                     font: { size: window.innerWidth < 640 ? 9 : 10 },
-                                    maxRotation: window.innerWidth < 640 ? 25 : 0,
-                                    minRotation: window.innerWidth < 640 ? 25 : 0
+                                    autoSkip: false,
+                                    padding: window.innerWidth < 640 ? 12 : 10,
+                                    maxRotation: 0,
+                                    minRotation: 0,
+                                    align: 'center',
+                                    crossAlign: 'center',
+                                    callback: function(value) {
+                                        const label = this.getLabelForValue(value);
+                                        return Array.isArray(label) ? label : String(label).split(' ');
+                                    }
                                 } 
                             },
                             y: { grid: { color: '#1f293d' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
@@ -1112,11 +1399,11 @@
             contentEl.innerHTML = '';
 
             if (type === 'income') {
-                titleEl.innerText = "Todos los Ingresos Globales";
+                titleEl.innerText = dashboardScope === 'year' ? `Ingresos del Año ${dashboardYear}` : "Todos los Ingresos Globales";
                 let count = 0;
                 let totalIncomeSum = 0;
                 let itemsHtml = '';
-                Object.keys(db.periods).sort().forEach(ym => {
+                getDashboardPeriodKeys().sort().forEach(ym => {
                     const p = db.periods[ym];
 
                     if (p.fixedBlock && p.fixedBlock.plannedRecords) {
@@ -1171,12 +1458,12 @@
                     </div>
                 `;
             } else if (type === 'expense') {
-                titleEl.innerText = "Todos los Gastos Globales";
+                titleEl.innerText = dashboardScope === 'year' ? `Gastos del Año ${dashboardYear}` : "Todos los Gastos Globales";
                 let count = 0;
                 let totalExpenseSum = 0;
                 let itemsHtml = '';
 
-                Object.keys(db.periods).sort().forEach(ym => {
+                getDashboardPeriodKeys().sort().forEach(ym => {
                     const p = db.periods[ym];
                     
                     if (p.fixedBlock && p.fixedBlock.plannedRecords) {
@@ -1246,11 +1533,11 @@
                     </div>
                 `;
             } else if (type === 'savings') {
-                titleEl.innerText = "Detalle Histórico de Ahorros / Cajas";
+                titleEl.innerText = dashboardScope === 'year' ? `Ahorros del Año ${dashboardYear}` : "Detalle Histórico de Ahorros / Cajas";
                 let count = 0;
                 let totalSavingsSum = 0;
                 let itemsHtml = '';
-                Object.keys(db.periods).sort().forEach(ym => {
+                getDashboardPeriodKeys().sort().forEach(ym => {
                     const boxTotals = getPeriodBoxTotals(ym);
                     const mTot = boxTotals.box1 + boxTotals.box2 + boxTotals.box3;
                     if (mTot > 0 || boxTotals.box1 !== 0 || boxTotals.box2 !== 0 || boxTotals.box3 !== 0) {
@@ -1285,6 +1572,7 @@
             }
 
             modal.classList.remove('hidden');
+            resetModalScroll('dashboard-modal-content');
         }
 
         function openDebtModal(debtId) {
@@ -1301,7 +1589,7 @@
             let totalAbonos = 0;
             let abonosListHtml = '';
 
-            Object.keys(db.periods).forEach(ym => {
+            getDashboardPeriodKeys().forEach(ym => {
                 const p = db.periods[ym];
                 if (p && p.transactions) {
                     p.transactions.forEach(t => {
@@ -1357,6 +1645,7 @@
             `;
 
             modal.classList.remove('hidden');
+            resetModalScroll('dashboard-modal-content');
         }
 
         function openSavingsBoxModal(boxNum) {
@@ -1422,6 +1711,7 @@
             `;
 
             modal.classList.remove('hidden');
+            resetModalScroll('dashboard-modal-content');
         }
 
         function closeDashboardModal() {
@@ -1465,7 +1755,7 @@
         function renderDashboard() {
             let totalInc = 0, totalExp = 0, totalSav = 0;
 
-            Object.keys(db.periods).forEach(ym => {
+            getDashboardPeriodKeys().forEach(ym => {
                 const p = db.periods[ym];
                 const boxTotals = getPeriodBoxTotals(ym);
                 totalSav += (boxTotals.box1 + boxTotals.box2 + boxTotals.box3);
@@ -1516,7 +1806,7 @@
 
             const recentContainer = document.getElementById('dash-recent-periods');
             recentContainer.innerHTML = '';
-            const sortedYM = Object.keys(db.periods).sort().reverse().slice(0, 3);
+            const sortedYM = getDashboardPeriodKeys().sort().reverse().slice(0, 3);
             
             if (sortedYM.length === 0) {
                 recentContainer.innerHTML = '<p class="text-xs text-slate-500">Sin periodos activos.</p>';
@@ -1569,7 +1859,7 @@
 
         function renderDashboardChart() {
             const ctx = document.getElementById('mainDashboardChart').getContext('2d');
-            const sortedYM = Object.keys(db.periods).sort();
+            const sortedYM = getDashboardPeriodKeys().sort();
             const labels = sortedYM.map(ym => {
                 const [y, m] = ym.split('-');
                 return `${m} / ${y.slice(-2)}`;
@@ -1582,14 +1872,21 @@
             if (chartInstance) chartInstance.destroy();
 
             chartInstance = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Acumulado en Cajas',
                         data: dataValues,
-                        backgroundColor: '#6366f1',
-                        borderRadius: 6
+                        borderColor: '#818cf8',
+                        backgroundColor: 'rgba(99,102,241,0.12)',
+                        pointBackgroundColor: '#6366f1',
+                        pointBorderColor: themeMode === 'light' ? '#ffffff' : '#111827',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        tension: 0.35,
+                        fill: true
                     }]
                 },
                 options: {
@@ -1644,16 +1941,16 @@
                 const totSav = boxTotals.box1 + boxTotals.box2 + boxTotals.box3;
 
                 grid.innerHTML += `
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-7 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/10 space-y-4 relative overflow-hidden group min-h-[180px] flex flex-col justify-between">
+                    <div onclick="openPeriodDetail('${ym}')" class="bg-nexus-800 border border-nexus-700/80 p-7 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/10 space-y-4 relative overflow-hidden group min-h-[180px] flex flex-col justify-between cursor-pointer">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500 group-hover:bg-indigo-400 transition-all"></div>
                         <div class="flex justify-between items-center">
-                            <h3 onclick="openPeriodDetail('${ym}')" class="font-black text-slate-100 text-sm uppercase tracking-wider cursor-pointer hover:text-indigo-400 transition-colors">${formatMonthName(ym)}</h3>
+                            <h3 class="font-black text-slate-100 text-sm uppercase tracking-wider hover:text-indigo-400 transition-colors">${formatMonthName(ym)}</h3>
                             <div class="flex items-center space-x-2">
                                 <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30 font-bold uppercase">Activo</span>
-                                <button onclick="deletePeriod('${ym}')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors" title="Eliminar periodo"><i class="fa-solid fa-trash text-xs"></i></button>
+                                <button onclick="event.stopPropagation(); deletePeriod('${ym}')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors" title="Eliminar periodo"><i class="fa-solid fa-trash text-xs"></i></button>
                             </div>
                         </div>
-                        <div onclick="openPeriodDetail('${ym}')" class="grid grid-cols-3 gap-2 pt-2 border-t border-nexus-700 text-center cursor-pointer">
+                        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-nexus-700 text-center">
                             <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden">
                                 <span class="text-[9px] uppercase text-slate-400 block font-extrabold">Ingresos</span>
                                 <span class="text-xs font-bold text-teal-400">${formatCurrency(inc)}</span>
@@ -1751,8 +2048,12 @@
             updateFixedBlockDisplay();
             renderPeriodDetailContent();
 
-            document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
-            document.getElementById('view-period-detail').classList.remove('hidden');
+            document.querySelectorAll('.view-panel').forEach(el => { el.classList.add('hidden'); el.classList.remove('view-enter'); });
+            const detailPanel = document.getElementById('view-period-detail');
+            detailPanel.classList.remove('hidden');
+            void detailPanel.offsetWidth;
+            detailPanel.classList.add('view-enter');
+            scrollAppToTop('smooth');
         }
 
         function getPrevYM(ym) {
@@ -2325,6 +2626,95 @@
                     `;
                 });
             }
+        }
+
+        // ================= DETALLE POR CATEGORÍAS =================
+        function openCategoryDetailsModal(type) {
+            const p = db.periods[currentActiveYM];
+            if (!p) return;
+            const totals = {};
+            const categoryType = type === 'income' ? 'income' : 'expense';
+
+            if (categoryType === 'income' && p.fixedBlock && p.fixedBlock.plannedRecords) {
+                p.fixedBlock.plannedRecords.forEach(r => {
+                    if (r.desc && r.desc.toLowerCase().includes('colchón anterior')) {
+                        totals['Colchón / Ingreso'] = (totals['Colchón / Ingreso'] || 0) + Number(r.amount);
+                    }
+                });
+            }
+
+            (p.transactions || []).forEach(t => {
+                if ((t.status || 'Realizado') !== 'Realizado') return;
+                if (categoryType === 'income' && t.type === 'income') totals[t.category] = (totals[t.category] || 0) + Number(t.amount);
+                if (categoryType === 'expense' && t.type === 'expense') totals[t.category] = (totals[t.category] || 0) + Number(t.amount);
+                if (categoryType === 'expense' && t.type === 'debt') {
+                    const label = `Deuda: ${t.category}`;
+                    totals[label] = (totals[label] || 0) + Number(t.amount);
+                }
+            });
+
+            if (categoryType === 'expense' && p.fixedBlock && p.fixedBlock.plannedRecords) {
+                p.fixedBlock.plannedRecords.forEach(r => {
+                    totals['Presupuesto Ingresado'] = (totals['Presupuesto Ingresado'] || 0) + Number(r.amount);
+                });
+            }
+            if (categoryType === 'expense') {
+                (p.savingsRecords || []).forEach(r => {
+                    const label = `Ahorro: ${db.boxNames[r.box] || r.box}`;
+                    totals[label] = (totals[label] || 0) + Number(r.amount);
+                });
+            }
+
+            const entries = Object.entries(totals).filter(([,v]) => Number(v) > 0).sort((a,b) => b[1]-a[1]);
+            const labels = entries.map(([k]) => {
+                const words = String(k).split(/\s+/);
+                const lines = [];
+                let line = '';
+                words.forEach(word => {
+                    const candidate = line ? `${line} ${word}` : word;
+                    if (candidate.length > 14 && line) { lines.push(line); line = word; }
+                    else line = candidate;
+                });
+                if (line) lines.push(line);
+                return lines.length ? lines : [String(k)];
+            });
+            const values = entries.map(([,v]) => v);
+            const total = values.reduce((a,b) => a+b, 0);
+            const top = entries[0];
+            const title = categoryType === 'income' ? 'Detalle de Ingresos por Categoría' : 'Detalle de Gastos por Categoría';
+            document.getElementById('category-details-title').innerText = title;
+            const content = document.getElementById('category-details-content');
+            content.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-nexus-900 p-3.5 rounded-xl border border-nexus-700 relative overflow-hidden"><div class="absolute right-0 top-0 bottom-0 w-1.5 ${categoryType === 'income' ? 'bg-teal-500' : 'bg-rose-500'}"></div><span class="text-[10px] uppercase text-slate-400 font-extrabold block">Total</span><span class="text-base font-black ${categoryType === 'income' ? 'text-teal-400' : 'text-rose-400'} mt-1 block">${formatCurrency(total)}</span></div>
+                    <div class="bg-nexus-900 p-3.5 rounded-xl border border-nexus-700 relative overflow-hidden"><div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div><span class="text-[10px] uppercase text-slate-400 font-extrabold block">Categorías</span><span class="text-base font-black text-indigo-400 mt-1 block">${entries.length}</span></div>
+                    <div class="bg-nexus-900 p-3.5 rounded-xl border border-nexus-700 relative overflow-hidden"><div class="absolute right-0 top-0 bottom-0 w-1.5 bg-amber-500"></div><span class="text-[10px] uppercase text-slate-400 font-extrabold block">Mayor ${categoryType === 'income' ? 'aporte' : 'consumo'}</span><span class="text-sm font-black text-amber-400 mt-1 block truncate">${top ? top[0] : 'Sin registros'}</span></div>
+                </div>
+                <div class="bg-nexus-900 p-4 rounded-xl border border-nexus-700 space-y-3">
+                    <div class="flex items-center justify-between"><h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-chart-line ${categoryType === 'income' ? 'text-teal-400' : 'text-rose-400'} mr-2"></i>Comparativa del periodo</h4><span class="text-[10px] text-slate-500">${formatMonthName(currentActiveYM)}</span></div>
+                    <div class="h-72 sm:h-80 relative"><canvas id="categoryDetailsChart"></canvas></div>
+                </div>
+                <div class="space-y-2">
+                    ${entries.map(([name,value],i)=>`<div class="bg-nexus-900 p-3 rounded-xl border border-nexus-700 flex items-center justify-between text-xs"><div class="min-w-0"><span class="font-bold text-slate-200 block truncate">${i+1}. ${name}</span><span class="text-[10px] text-slate-500">${total ? ((value/total)*100).toFixed(1) : '0.0'}% del total</span></div><span class="font-black ${categoryType === 'income' ? 'text-teal-400' : 'text-rose-400'} ml-3">${formatCurrency(value)}</span></div>`).join('') || '<p class="text-xs text-slate-500 text-center py-4">No hay registros suficientes para mostrar el detalle.</p>'}
+                </div>
+            `;
+            document.getElementById('category-details-modal').classList.remove('hidden');
+            resetModalScroll('category-details-content');
+            setTimeout(() => {
+                const canvas = document.getElementById('categoryDetailsChart');
+                if (!canvas) return;
+                if (categoryChartInstance) categoryChartInstance.destroy();
+                categoryChartInstance = new Chart(canvas.getContext('2d'), {
+                    type: 'line',
+                    data: { labels, datasets: [{ label: categoryType === 'income' ? 'Ingresos' : 'Gastos', data: values, borderColor: categoryType === 'income' ? '#2dd4bf' : '#fb7185', backgroundColor: categoryType === 'income' ? 'rgba(45,212,191,.10)' : 'rgba(251,113,133,.10)', pointBackgroundColor: categoryType === 'income' ? '#2dd4bf' : '#fb7185', pointBorderColor: themeMode === 'light' ? '#fff' : '#111827', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7, tension: .3, fill: true }] },
+                    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => `${formatCurrency(ctx.parsed.y)}` } } }, scales:{ x:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size: window.innerWidth < 640 ? 9 : 10}, autoSkip:false, maxRotation:0, minRotation:0, align:'center', crossAlign:'center', padding:10}}, y:{grid:{color: themeMode === 'light' ? '#dfe4ec' : '#1f293d'}, ticks:{color:'#94a3b8', font:{size:10}}} } }
+                });
+            }, 50);
+        }
+
+        function closeCategoryDetailsModal() {
+            document.getElementById('category-details-modal').classList.add('hidden');
+            if (categoryChartInstance) { categoryChartInstance.destroy(); categoryChartInstance = null; }
         }
 
         // ================= PASIVOS / DEUDAS =================
