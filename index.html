@@ -30,6 +30,18 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ESCALA GLOBAL DEL 10% EN PC Y -10% EN MÓVIL */
+        html {
+            font-size: 110% !important;
+            width: 100%;
+            height: 100%;
+        }
+        /* Reducción del 10% adicional específico para dispositivos móviles */
+        @media (max-width: 767px) {
+            html {
+                font-size: 100% !important;
+            }
+        }
         /* Estilos para el modo optimizado / colapsado en PC */
         aside.sidebar-collapsed {
             width: 5rem !important;
