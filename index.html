@@ -687,6 +687,17 @@
             box-shadow: 0 30px 80px rgba(0,0,0,.52) !important;
         }
 
+        /* Undo global: siempre por encima de modales, menús y contenido. */
+        #nexus-toast-container {
+            z-index: 99999 !important;
+            pointer-events: none !important;
+        }
+        #nexus-toast-container > div {
+            position: relative !important;
+            z-index: 100000 !important;
+            pointer-events: auto !important;
+        }
+
         /* Toast / alertas: same language as the modals */
         #nexus-toast-container > div {
             background: rgba(13,20,32,.94) !important;
@@ -2156,6 +2167,463 @@
     #view-period-detail .fixed-redesign .fixed-workspace { padding: 0 !important; gap: 10px !important; }
 }
 </style>
+
+<style id="config-module-headers-final">
+/* CONFIGURACIÓN — mismo sistema de encabezados maestro que Ahorros y Deudas */
+#view-ajustes .config-module-card {
+    background: var(--module-bg, linear-gradient(145deg,rgba(13,20,32,.985),rgba(7,12,20,.985))) !important;
+    border-color: var(--module-line, rgba(67,89,116,.62)) !important;
+    border-radius: var(--module-radius, 14px) !important;
+}
+#view-ajustes .config-unified-header {
+    margin: 0 !important;
+    padding-bottom: 13px !important;
+    border-bottom: 1px solid var(--nw-line-soft, rgba(67,89,116,.40));
+}
+#view-ajustes .config-section-hero .config-unified-header {
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+}
+#view-ajustes .config-section-hero {
+    padding: 20px 22px !important;
+    background: radial-gradient(520px 220px at 100% 0%, rgba(16,185,129,.075), transparent 68%), linear-gradient(145deg,rgba(17,25,38,.99),rgba(8,13,21,.99)) !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.018) !important;
+}
+#view-ajustes .config-module-card .nexus-module-icon {
+    width: 44px !important; height: 44px !important; flex: 0 0 44px !important; border-radius: 14px !important;
+}
+#view-ajustes .config-section-hero .nexus-module-icon {
+    width: 44px !important; height: 44px !important; flex-basis: 44px !important;
+}
+#view-ajustes .config-module-card .nexus-module-eyebrow { font-size: 10px !important; line-height: 1 !important; }
+#view-ajustes .config-module-card .nexus-module-title { font-size: 20px !important; line-height: 1.15 !important; letter-spacing: 0 !important; }
+#view-ajustes .config-module-card .nexus-module-desc { font-size: 12px !important; line-height: 1.3 !important; margin-top: 4px !important; color: #64748b !important; }
+#view-ajustes .config-module-card .nexus-module-action-btn { min-height: 39px !important; border-radius: 13px !important; }
+#view-ajustes .config-backup-header { margin-bottom: 2px !important; }
+#view-ajustes .config-backup-actions { margin-top: 0 !important; }
+#view-ajustes .config-module-card > .space-y-4 { margin-top: 0 !important; }
+#view-ajustes .config-module-card input,
+#view-ajustes .config-module-card select,
+#view-ajustes .config-module-card textarea { border-radius: 14px !important; }
+@media (max-width: 639px) {
+    #view-ajustes .config-unified-header { flex-direction: column !important; align-items: stretch !important; gap: 12px !important; }
+    #view-ajustes .config-module-card .nexus-module-action-btn { width: 100% !important; }
+    #view-ajustes .config-backup-actions { flex-direction: column !important; align-items: stretch !important; }
+    #view-ajustes .config-backup-actions > * { width: 100% !important; margin-left: 0 !important; }
+}
+</style>
+
+<style id="nexus-theme-system-v2">
+/* NEXUS THEME SYSTEM */
+:root{
+ --theme-bg:#070b12; --theme-surface:#0d1420; --theme-surface-2:#111b2b; --theme-surface-3:#172235;
+ --theme-text:#e5edf7; --theme-muted:#94a3b8; --theme-line:#2b3a50; --theme-accent:#10b981; --theme-accent-2:#34d399;
+ --theme-danger:#fb7185; --theme-shadow:rgba(0,0,0,.22);
+}
+html.theme-light{--theme-bg:#f2f5f8;--theme-surface:#fff;--theme-surface-2:#f7f9fb;--theme-surface-3:#e8edf3;--theme-text:#172033;--theme-muted:#5f6b7a;--theme-line:#cbd5e1;--theme-accent:#059669;--theme-accent-2:#10b981;--theme-shadow:rgba(15,23,42,.10)}
+html.theme-high-contrast{--theme-bg:#000;--theme-surface:#050505;--theme-surface-2:#0b0b0b;--theme-surface-3:#171717;--theme-text:#fff;--theme-muted:#fff;--theme-line:#fff;--theme-accent:#00ff66;--theme-accent-2:#00ff66;--theme-shadow:rgba(0,0,0,.8)}
+html.theme-sepia{--theme-bg:#f3e7d0;--theme-surface:#ead8b8;--theme-surface-2:#f7ecd9;--theme-surface-3:#d8c19b;--theme-text:#3f2d1f;--theme-muted:#715a43;--theme-line:#b79b72;--theme-accent:#9a641f;--theme-accent-2:#b87927;--theme-shadow:rgba(82,55,25,.15)}
+html.theme-cyberpunk{--theme-bg:#090012;--theme-surface:#130021;--theme-surface-2:#1b0530;--theme-surface-3:#2a0847;--theme-text:#f8f3ff;--theme-muted:#c6a8d8;--theme-line:#63208a;--theme-accent:#ff2bd6;--theme-accent-2:#00f5ff;--theme-shadow:rgba(255,0,200,.18)}
+html.theme-monochromatic{--theme-bg:#111;--theme-surface:#1b1b1b;--theme-surface-2:#242424;--theme-surface-3:#303030;--theme-text:#eee;--theme-muted:#aaa;--theme-line:#555;--theme-accent:#d4d4d4;--theme-accent-2:#fff;--theme-shadow:rgba(0,0,0,.35)}
+html[class*="theme-"] body{background:var(--theme-bg)!important;color:var(--theme-text)!important;background-image:none!important}
+html[class*="theme-"] #app-scroll{background:var(--theme-bg)!important}
+html[class*="theme-"] #main-sidebar,html[class*="theme-"] .bg-nexus-900{background:var(--theme-bg)!important;color:var(--theme-text)!important;border-color:var(--theme-line)!important}
+html[class*="theme-"] .bg-nexus-800{background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-line)!important}
+html[class*="theme-"] .bg-nexus-700{background:var(--theme-surface-3)!important;color:var(--theme-text)!important;border-color:var(--theme-line)!important}
+html[class*="theme-"] .border-nexus-700,html[class*="theme-"] .border-nexus-700\/80,html[class*="theme-"] .border-nexus-600{border-color:var(--theme-line)!important}
+html[class*="theme-"] .text-slate-100,html[class*="theme-"] .text-slate-200,html[class*="theme-"] .text-white{color:var(--theme-text)!important}
+html[class*="theme-"] .text-slate-300,html[class*="theme-"] .text-slate-400,html[class*="theme-"] .text-slate-500{color:var(--theme-muted)!important}
+html[class*="theme-"] input,html[class*="theme-"] select,html[class*="theme-"] textarea{background:var(--theme-surface-2)!important;color:var(--theme-text)!important;border-color:var(--theme-line)!important}
+html[class*="theme-"] input::placeholder,html[class*="theme-"] textarea::placeholder{color:var(--theme-muted)!important}
+html[class*="theme-"] .config-module-card,html[class*="theme-"] .nexus-module-card{box-shadow:0 12px 30px var(--theme-shadow)!important}
+html[class*="theme-"] .text-emerald-400,html[class*="theme-"] .text-teal-400{color:var(--theme-accent)!important}
+html[class*="theme-"] .bg-emerald-600,html[class*="theme-"] .bg-teal-600{background:var(--theme-accent)!important}
+html[class*="theme-"] .hover\:bg-emerald-500:hover,html[class*="theme-"] .hover\:bg-teal-500:hover{background:var(--theme-accent-2)!important}
+html[class*="theme-"] .border-emerald-500,html[class*="theme-"] .border-teal-500{border-color:var(--theme-accent)!important}
+html[class*="theme-"] .bg-emerald-500\/10,html[class*="theme-"] .bg-emerald-500\/5{background:color-mix(in srgb,var(--theme-accent) 10%,transparent)!important}
+html[class*="theme-"] .text-rose-400{color:var(--theme-danger)!important}
+html[class*="theme-cyberpunk"] .bg-emerald-600,html[class*="theme-cyberpunk"] .bg-teal-600{background:linear-gradient(90deg,#ff2bd6,#00f5ff)!important;color:#090012!important}
+html[class*="theme-cyberpunk"] .config-module-card{box-shadow:0 0 24px rgba(255,43,214,.10),inset 0 0 24px rgba(0,245,255,.025)!important}
+html[class*="theme-high-contrast"] *{text-shadow:none!important}
+html[class*="theme-high-contrast"] button,html[class*="theme-high-contrast"] input,html[class*="theme-high-contrast"] select{border-width:2px!important}
+html[class*="theme-sepia"] .text-emerald-400,html[class*="theme-sepia"] .text-teal-400{color:#7b4b16!important}
+html[class*="theme-monochromatic"] .text-emerald-400,html[class*="theme-monochromatic"] .text-teal-400{color:#ddd!important}
+.theme-selector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:640px){.theme-selector-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.theme-option{position:relative;text-align:left;padding:12px;border:1px solid var(--theme-line);border-radius:13px;background:var(--theme-surface-2);color:var(--theme-text);transition:.2s ease;cursor:pointer}
+.theme-option:hover{transform:translateY(-1px);border-color:var(--theme-accent)}
+.theme-option.active{border-color:var(--theme-accent);box-shadow:0 0 0 1px var(--theme-accent),0 8px 22px var(--theme-shadow)}
+.theme-option .theme-dot{width:26px;height:26px;border-radius:9px;display:block;margin-bottom:9px;border:1px solid rgba(255,255,255,.22)}
+.theme-option strong{display:block;font-size:11px;font-weight:900;letter-spacing:.02em}.theme-option span{display:block;font-size:9px;color:var(--theme-muted);margin-top:2px}
+.theme-dot-light{background:linear-gradient(135deg,#fff,#dbe3ec)}.theme-dot-dark{background:linear-gradient(135deg,#0d1420,#10b981)}.theme-dot-contrast{background:linear-gradient(135deg,#000,#00ff66)}.theme-dot-sepia{background:linear-gradient(135deg,#f3e7d0,#9a641f)}.theme-dot-cyber{background:linear-gradient(135deg,#ff2bd6,#00f5ff)}.theme-dot-mono{background:linear-gradient(135deg,#111,#eee)}
+</style>
+    <style id="nexus-theme-accessibility-v3">
+        /* ================================================================
+           NEXUS WEALTH — THEME ENGINE V3
+           Paleta completa + contraste de texto + colores semánticos.
+           La interfaz NO depende de colores hardcodeados del Dark Mode.
+        ================================================================= */
+        :root {
+            --theme-bg:#070b12;
+            --theme-surface:#0d1420;
+            --theme-surface-2:#111a29;
+            --theme-surface-3:#172235;
+            --theme-input:#0b121d;
+            --theme-text:#f1f5f9;
+            --theme-text-strong:#ffffff;
+            --theme-muted:#94a3b8;
+            --theme-dim:#64748b;
+            --theme-line:#26364d;
+            --theme-line-soft:#334155;
+            --theme-positive:#34d399;
+            --theme-negative:#fb7185;
+            --theme-savings:#2dd4bf;
+            --theme-debt:#f59e0b;
+            --theme-available:#60a5fa;
+            --theme-accent:#34d399;
+            --theme-accent-2:#10b981;
+            --theme-on-accent:#06130e;
+            --theme-overlay:rgba(0,0,0,.72);
+            --theme-shadow:rgba(0,0,0,.24);
+        }
+
+        /* LIGHT — fondos claros + texto oscuro de alto contraste */
+        html.theme-light {
+            --theme-bg:#f4f7fb;
+            --theme-surface:#ffffff;
+            --theme-surface-2:#f8fafc;
+            --theme-surface-3:#e9eef5;
+            --theme-input:#ffffff;
+            --theme-text:#172033;
+            --theme-text-strong:#0b1220;
+            --theme-muted:#475569;
+            --theme-dim:#64748b;
+            --theme-line:#cbd5e1;
+            --theme-line-soft:#94a3b8;
+            --theme-positive:#047857;
+            --theme-negative:#be123c;
+            --theme-savings:#0f766e;
+            --theme-debt:#b45309;
+            --theme-available:#1d4ed8;
+            --theme-accent:#047857;
+            --theme-accent-2:#059669;
+            --theme-on-accent:#ffffff;
+            --theme-overlay:rgba(15,23,42,.58);
+            --theme-shadow:rgba(15,23,42,.10);
+        }
+
+        /* HIGH CONTRAST — negro real + amarillo intenso */
+        html.theme-high-contrast {
+            --theme-bg:#000000;
+            --theme-surface:#050505;
+            --theme-surface-2:#0b0b0b;
+            --theme-surface-3:#161616;
+            --theme-input:#000000;
+            --theme-text:#ffffff;
+            --theme-text-strong:#ffffff;
+            --theme-muted:#f5f5f5;
+            --theme-dim:#d4d4d4;
+            --theme-line:#ffffff;
+            --theme-line-soft:#facc15;
+            --theme-positive:#39ff14;
+            --theme-negative:#ff3b30;
+            --theme-savings:#00e5ff;
+            --theme-debt:#ffb000;
+            --theme-available:#ffe600;
+            --theme-accent:#ffe600;
+            --theme-accent-2:#ffcc00;
+            --theme-on-accent:#000000;
+            --theme-overlay:rgba(0,0,0,.88);
+            --theme-shadow:rgba(255,230,0,.16);
+        }
+
+        /* SEPIA — todo el sistema migra a tonos cálidos */
+        html.theme-sepia {
+            --theme-bg:#f1e4cf;
+            --theme-surface:#fbf1df;
+            --theme-surface-2:#f7ead4;
+            --theme-surface-3:#e5cfac;
+            --theme-input:#fff8ea;
+            --theme-text:#3b2a1d;
+            --theme-text-strong:#24180f;
+            --theme-muted:#6b5139;
+            --theme-dim:#846b50;
+            --theme-line:#b99b70;
+            --theme-line-soft:#9f8058;
+            --theme-positive:#4f6f35;
+            --theme-negative:#a63d32;
+            --theme-savings:#39756d;
+            --theme-debt:#9a5a16;
+            --theme-available:#496a86;
+            --theme-accent:#8b5e20;
+            --theme-accent-2:#a96f25;
+            --theme-on-accent:#fff8ea;
+            --theme-overlay:rgba(48,32,18,.60);
+            --theme-shadow:rgba(82,55,25,.15);
+        }
+
+        /* CYBERPUNK — ninguna superficie conserva accidentalmente el Dark Mode */
+        html.theme-cyberpunk {
+            --theme-bg:#08000f;
+            --theme-surface:#12001f;
+            --theme-surface-2:#1a0329;
+            --theme-surface-3:#27063d;
+            --theme-input:#0d0017;
+            --theme-text:#f8f3ff;
+            --theme-text-strong:#ffffff;
+            --theme-muted:#d5b9e7;
+            --theme-dim:#ad87c2;
+            --theme-line:#7130a0;
+            --theme-line-soft:#a044d0;
+            --theme-positive:#39ff88;
+            --theme-negative:#ff477e;
+            --theme-savings:#00f5ff;
+            --theme-debt:#ff9d00;
+            --theme-available:#8b7dff;
+            --theme-accent:#ff2bd6;
+            --theme-accent-2:#00f5ff;
+            --theme-on-accent:#100018;
+            --theme-overlay:rgba(7,0,14,.82);
+            --theme-shadow:rgba(255,43,214,.18);
+        }
+
+        /* MONOCHROMATIC — un solo lenguaje de grises */
+        html.theme-monochromatic {
+            --theme-bg:#101010;
+            --theme-surface:#191919;
+            --theme-surface-2:#222222;
+            --theme-surface-3:#2d2d2d;
+            --theme-input:#151515;
+            --theme-text:#eeeeee;
+            --theme-text-strong:#ffffff;
+            --theme-muted:#bdbdbd;
+            --theme-dim:#929292;
+            --theme-line:#555555;
+            --theme-line-soft:#707070;
+            --theme-positive:#e5e5e5;
+            --theme-negative:#a8a8a8;
+            --theme-savings:#d0d0d0;
+            --theme-debt:#8d8d8d;
+            --theme-available:#f2f2f2;
+            --theme-accent:#d8d8d8;
+            --theme-accent-2:#ffffff;
+            --theme-on-accent:#111111;
+            --theme-overlay:rgba(0,0,0,.82);
+            --theme-shadow:rgba(0,0,0,.35);
+        }
+
+        /* ---------- superficies ---------- */
+        html[class*="theme-"] body,
+        html[class*="theme-"] #app-scroll { background:var(--theme-bg)!important; color:var(--theme-text)!important; }
+        html[class*="theme-"] .bg-nexus-900,
+        html[class*="theme-"] #main-sidebar { background:var(--theme-bg)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] .bg-nexus-800,
+        html[class*="theme-"] .bg-nexus-800\/80 { background:var(--theme-surface)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] .bg-nexus-700,
+        html[class*="theme-"] .bg-nexus-600 { background:var(--theme-surface-3)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] header { background:color-mix(in srgb,var(--theme-surface) 94%,transparent)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] input,
+        html[class*="theme-"] select,
+        html[class*="theme-"] textarea,
+        html[class*="theme-"] .savings-field,
+        html[class*="theme-"] .savings-money-field { background:var(--theme-input)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] input::placeholder,
+        html[class*="theme-"] textarea::placeholder { color:var(--theme-muted)!important; opacity:1!important; }
+
+        /* ---------- tipografía: elimina blancos ilegibles en fondos claros ---------- */
+        html[class*="theme-"] .text-white,
+        html[class*="theme-"] .text-slate-50,
+        html[class*="theme-"] .text-slate-100,
+        html[class*="theme-"] .text-slate-200 { color:var(--theme-text)!important; }
+        html[class*="theme-"] .text-slate-300,
+        html[class*="theme-"] .text-slate-400 { color:var(--theme-muted)!important; }
+        html[class*="theme-"] .text-slate-500 { color:var(--theme-dim)!important; }
+        html[class*="theme-"] .text-slate-950 { color:var(--theme-text-strong)!important; }
+
+        /* ---------- colores semánticos financieros ---------- */
+        html[class*="theme-"] .text-emerald-400,
+        html[class*="theme-"] .text-emerald-300,
+        html[class*="theme-"] .text-emerald-200,
+        html[class*="theme-"] .text-teal-400,
+        html[class*="theme-"] .text-teal-300 { color:var(--theme-positive)!important; }
+        html[class*="theme-"] .text-rose-400,
+        html[class*="theme-"] .text-rose-300,
+        html[class*="theme-"] .text-rose-200 { color:var(--theme-negative)!important; }
+        html[class*="theme-"] .text-amber-400,
+        html[class*="theme-"] .text-amber-300,
+        html[class*="theme-"] .text-amber-200 { color:var(--theme-debt)!important; }
+        html[class*="theme-"] .text-cyan-400,
+        html[class*="theme-"] .text-cyan-300 { color:var(--theme-savings)!important; }
+        html[class*="theme-"] .text-blue-400,
+        html[class*="theme-"] .text-blue-300 { color:var(--theme-available)!important; }
+
+        html[class*="theme-"] .bg-emerald-500,
+        html[class*="theme-"] .bg-emerald-600,
+        html[class*="theme-"] .bg-teal-500,
+        html[class*="theme-"] .bg-teal-600 { background:var(--theme-positive)!important; color:var(--theme-on-accent)!important; }
+        html[class*="theme-"] .bg-rose-500,
+        html[class*="theme-"] .bg-rose-600 { background:var(--theme-negative)!important; color:#fff!important; }
+        html[class*="theme-"] .bg-amber-500,
+        html[class*="theme-"] .bg-amber-600 { background:var(--theme-debt)!important; color:#111!important; }
+        html[class*="theme-"] .bg-blue-500,
+        html[class*="theme-"] .bg-blue-600 { background:var(--theme-available)!important; color:#fff!important; }
+
+        html[class*="theme-"] .border-emerald-500,
+        html[class*="theme-"] .border-emerald-400,
+        html[class*="theme-"] .border-teal-500 { border-color:var(--theme-positive)!important; }
+        html[class*="theme-"] .border-rose-500 { border-color:var(--theme-negative)!important; }
+        html[class*="theme-"] .border-amber-500 { border-color:var(--theme-debt)!important; }
+
+        /* Opacidades de fondos semánticos */
+        html[class*="theme-"] [class*="bg-emerald-500\/10"],
+        html[class*="theme-"] [class*="bg-emerald-500\/5"] { background:color-mix(in srgb,var(--theme-positive) 10%,transparent)!important; }
+        html[class*="theme-"] [class*="bg-rose-500\/10"],
+        html[class*="theme-"] [class*="bg-rose-500\/5"] { background:color-mix(in srgb,var(--theme-negative) 10%,transparent)!important; }
+        html[class*="theme-"] [class*="bg-amber-500\/10"],
+        html[class*="theme-"] [class*="bg-amber-500\/5"] { background:color-mix(in srgb,var(--theme-debt) 10%,transparent)!important; }
+
+        /* Botones / navegación */
+        html[class*="theme-"] .sidebar-btn.text-slate-400 { color:var(--theme-muted)!important; }
+        html[class*="theme-"] .sidebar-btn:hover { color:var(--theme-text-strong)!important; background:var(--theme-surface-3)!important; }
+        html[class*="theme-"] .sidebar-btn.bg-emerald-600,
+        html[class*="theme-"] .sidebar-btn.bg-emerald-500 { background:var(--theme-positive)!important; color:var(--theme-on-accent)!important; }
+        html[class*="theme-"] .dashboard-filter-btn { background:var(--theme-surface-2)!important; color:var(--theme-muted)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] .dashboard-filter-btn:hover,
+        html[class*="theme-"] .dashboard-filter-btn.active { color:var(--theme-accent)!important; border-color:var(--theme-accent)!important; background:color-mix(in srgb,var(--theme-accent) 10%,var(--theme-surface))!important; }
+
+        /* Componentes que tenían estilos inline del Dark Mode */
+        html[class*="theme-"] .nexus-module-title { color:var(--theme-text-strong)!important; }
+        html[class*="theme-"] .nexus-module-desc { color:var(--theme-muted)!important; }
+        html[class*="theme-"] .nexus-module-action { background:var(--theme-surface-2)!important; border-color:var(--theme-line)!important; color:var(--theme-text)!important; }
+        html[class*="theme-"] .nexus-module-icon { background:var(--theme-surface-3)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] .config-module-card { box-shadow:0 12px 30px var(--theme-shadow)!important; }
+
+        /* Modal overlays y paneles */
+        html[class*="theme-"] .bg-black\/70 { background:var(--theme-overlay)!important; }
+        html[class*="theme-"] .bg-black\/75 { background:var(--theme-overlay)!important; }
+        html[class*="theme-"] #dashboard-modal > div,
+        html[class*="theme-"] #category-details-modal > div,
+        html[class*="theme-"] #delete-confirm-modal > div { background:var(--theme-surface)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+
+        /* Scrollbar */
+        html[class*="theme-"] ::-webkit-scrollbar-track { background:var(--theme-bg)!important; }
+        html[class*="theme-"] ::-webkit-scrollbar-thumb { background:var(--theme-line-soft)!important; }
+        html[class*="theme-"] ::-webkit-scrollbar-thumb:hover { background:var(--theme-accent)!important; }
+
+        /* Alto contraste: controles extremadamente definidos */
+        html.theme-high-contrast button,
+        html.theme-high-contrast input,
+        html.theme-high-contrast select,
+        html.theme-high-contrast textarea { border-width:2px!important; }
+        html.theme-high-contrast .text-emerald-400,
+        html.theme-high-contrast .text-teal-400 { text-shadow:0 0 7px rgba(255,230,0,.25); }
+
+        /* Cyberpunk: glow solo donde aporta, sin heredar superficies Dark */
+        html.theme-cyberpunk .bg-emerald-500,
+        html.theme-cyberpunk .bg-emerald-600,
+        html.theme-cyberpunk .bg-teal-500,
+        html.theme-cyberpunk .bg-teal-600 { background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent-2))!important; }
+        html.theme-cyberpunk .config-module-card { box-shadow:0 0 24px rgba(255,43,214,.10),inset 0 0 24px rgba(0,245,255,.025)!important; }
+
+        /* Sepia: neutraliza cualquier texto frío que venga de la paleta original */
+        html.theme-sepia .text-cyan-400,
+        html.theme-sepia .text-blue-400 { color:var(--theme-available)!important; }
+
+        /* Monochromatic: todos los estados usan únicamente grises */
+        html.theme-monochromatic .text-emerald-400,
+        html.theme-monochromatic .text-teal-400 { color:var(--theme-positive)!important; }
+        html.theme-monochromatic .text-rose-400 { color:var(--theme-negative)!important; }
+
+        /* Selector de temas */
+        html[class*="theme-"] .theme-option { background:var(--theme-surface-2)!important; color:var(--theme-text)!important; border-color:var(--theme-line)!important; }
+        html[class*="theme-"] .theme-option span:not(.theme-dot) { color:var(--theme-muted)!important; }
+        html[class*="theme-"] .theme-option:hover,
+        html[class*="theme-"] .theme-option.active { border-color:var(--theme-accent)!important; }
+
+        /* Focus siempre visible en todos los temas */
+        html[class*="theme-"] button:focus-visible,
+        html[class*="theme-"] input:focus-visible,
+        html[class*="theme-"] select:focus-visible,
+        html[class*="theme-"] textarea:focus-visible { outline:2px solid var(--theme-accent)!important; outline-offset:2px; }
+    </style>
+
+
+<style id="nexus-theme-final-audit">
+/* FINAL THEME AUDIT — elimina colores heredados de Tailwind/estilos originales */
+html[class*="theme-"] .text-gray-50,html[class*="theme-"] .text-gray-100,html[class*="theme-"] .text-gray-200,html[class*="theme-"] .text-gray-300,html[class*="theme-"] .text-gray-400,html[class*="theme-"] .text-gray-500,
+html[class*="theme-"] .text-zinc-50,html[class*="theme-"] .text-zinc-100,html[class*="theme-"] .text-zinc-200,html[class*="theme-"] .text-zinc-300,html[class*="theme-"] .text-zinc-400,html[class*="theme-"] .text-zinc-500,
+html[class*="theme-"] .text-neutral-50,html[class*="theme-"] .text-neutral-100,html[class*="theme-"] .text-neutral-200,html[class*="theme-"] .text-neutral-300,html[class*="theme-"] .text-neutral-400,html[class*="theme-"] .text-neutral-500 { color:var(--theme-muted)!important; }
+html[class*="theme-"] .text-gray-50,html[class*="theme-"] .text-gray-100,html[class*="theme-"] .text-zinc-50,html[class*="theme-"] .text-zinc-100,html[class*="theme-"] .text-neutral-50 { color:var(--theme-text-strong)!important; }
+
+/* Toda la familia cromática original se traduce al tema activo. */
+html[class*="theme-"] .text-green-300,html[class*="theme-"] .text-green-400,html[class*="theme-"] .text-green-500,html[class*="theme-"] .text-lime-300,html[class*="theme-"] .text-lime-400 { color:var(--theme-positive)!important; }
+html[class*="theme-"] .text-red-300,html[class*="theme-"] .text-red-400,html[class*="theme-"] .text-red-500,html[class*="theme-"] .text-pink-300,html[class*="theme-"] .text-pink-400 { color:var(--theme-negative)!important; }
+html[class*="theme-"] .text-yellow-300,html[class*="theme-"] .text-yellow-400,html[class*="theme-"] .text-orange-300,html[class*="theme-"] .text-orange-400 { color:var(--theme-debt)!important; }
+html[class*="theme-"] .text-sky-300,html[class*="theme-"] .text-sky-400,html[class*="theme-"] .text-cyan-300,html[class*="theme-"] .text-cyan-400 { color:var(--theme-savings)!important; }
+html[class*="theme-"] .text-blue-300,html[class*="theme-"] .text-blue-400,html[class*="theme-"] .text-indigo-300,html[class*="theme-"] .text-indigo-400 { color:var(--theme-available)!important; }
+html[class*="theme-"] .text-purple-300,html[class*="theme-"] .text-purple-400,html[class*="theme-"] .text-fuchsia-300,html[class*="theme-"] .text-fuchsia-400 { color:var(--theme-accent)!important; }
+
+html[class*="theme-"] .bg-green-500,html[class*="theme-"] .bg-green-600,html[class*="theme-"] .bg-lime-500,html[class*="theme-"] .bg-lime-600 { background:var(--theme-positive)!important;color:var(--theme-on-accent)!important; }
+html[class*="theme-"] .bg-red-500,html[class*="theme-"] .bg-red-600,html[class*="theme-"] .bg-pink-500,html[class*="theme-"] .bg-pink-600 { background:var(--theme-negative)!important;color:#fff!important; }
+html[class*="theme-"] .bg-yellow-500,html[class*="theme-"] .bg-yellow-600,html[class*="theme-"] .bg-orange-500,html[class*="theme-"] .bg-orange-600 { background:var(--theme-debt)!important;color:var(--theme-on-accent)!important; }
+html[class*="theme-"] .bg-cyan-500,html[class*="theme-"] .bg-cyan-600,html[class*="theme-"] .bg-sky-500,html[class*="theme-"] .bg-sky-600 { background:var(--theme-savings)!important;color:var(--theme-on-accent)!important; }
+html[class*="theme-"] .bg-blue-500,html[class*="theme-"] .bg-blue-600,html[class*="theme-"] .bg-indigo-500,html[class*="theme-"] .bg-indigo-600 { background:var(--theme-available)!important;color:#fff!important; }
+html[class*="theme-"] .bg-purple-500,html[class*="theme-"] .bg-purple-600,html[class*="theme-"] .bg-fuchsia-500,html[class*="theme-"] .bg-fuchsia-600 { background:var(--theme-accent)!important;color:var(--theme-on-accent)!important; }
+
+/* Gradientes que nacieron en Dark Mode se vuelven neutros/temáticos. */
+html.theme-light [class*="from-nexus-"],html.theme-light [class*="to-nexus-"],html.theme-light [class*="via-nexus-"] { background-image:none!important; }
+html.theme-light [class*="bg-gradient"] { background-color:var(--theme-surface)!important; }
+html.theme-sepia [class*="bg-gradient"] { background-image:linear-gradient(145deg,var(--theme-surface),var(--theme-surface-2))!important; }
+html.theme-monochromatic [class*="bg-gradient"] { background-image:linear-gradient(145deg,var(--theme-surface),var(--theme-surface-3))!important; }
+html.theme-high-contrast [class*="bg-gradient"] { background-image:none!important;background-color:#000!important; }
+html.theme-cyberpunk [class*="bg-gradient"] { background-image:linear-gradient(135deg,#12001f,#27063d)!important; }
+
+/* Elementos con color inline heredado: los contenedores críticos se fuerzan al lenguaje del tema. */
+html.theme-light #view-ajustes .config-section-hero,
+html.theme-light #view-ajustes .config-module-card { color:var(--theme-text)!important; }
+html.theme-light #view-ajustes .config-section-hero { background:linear-gradient(145deg,#ffffff,#eef4f8)!important; }
+html.theme-sepia #view-ajustes .config-section-hero { background:linear-gradient(145deg,#fbf1df,#e5cfac)!important; }
+html.theme-cyberpunk #view-ajustes .config-section-hero { background:linear-gradient(145deg,#12001f,#27063d)!important; }
+html.theme-monochromatic #view-ajustes .config-section-hero { background:linear-gradient(145deg,#191919,#303030)!important; }
+html.theme-high-contrast #view-ajustes .config-section-hero { background:#000!important;border-color:#ffe600!important; }
+
+/* High Contrast: estados distinguidos, pero sin perder legibilidad. */
+html.theme-high-contrast .text-emerald-400,html.theme-high-contrast .text-teal-400 { color:#39ff14!important; }
+html.theme-high-contrast .text-rose-400 { color:#ff4d4d!important; }
+html.theme-high-contrast .text-cyan-400 { color:#00e5ff!important; }
+html.theme-high-contrast .text-amber-400 { color:#ffb000!important; }
+html.theme-high-contrast .text-blue-400 { color:#ffe600!important; }
+html.theme-high-contrast button:hover,html.theme-high-contrast .theme-option:hover { background:#171717!important; }
+
+/* Monochromatic: absolutamente ninguna clase conserva color cromático. */
+html.theme-monochromatic [class*="text-"] { }
+html.theme-monochromatic .text-emerald-400,html.theme-monochromatic .text-teal-400,html.theme-monochromatic .text-cyan-400,html.theme-monochromatic .text-blue-400,html.theme-monochromatic .text-amber-400,html.theme-monochromatic .text-rose-400,html.theme-monochromatic .text-green-400,html.theme-monochromatic .text-red-400,html.theme-monochromatic .text-yellow-400,html.theme-monochromatic .text-orange-400,html.theme-monochromatic .text-purple-400,html.theme-monochromatic .text-indigo-400,html.theme-monochromatic .text-fuchsia-400 { color:var(--theme-text)!important; }
+html.theme-monochromatic [class*="bg-emerald-"],html.theme-monochromatic [class*="bg-teal-"],html.theme-monochromatic [class*="bg-cyan-"],html.theme-monochromatic [class*="bg-blue-"],html.theme-monochromatic [class*="bg-amber-"],html.theme-monochromatic [class*="bg-rose-"],html.theme-monochromatic [class*="bg-red-"],html.theme-monochromatic [class*="bg-yellow-"],html.theme-monochromatic [class*="bg-orange-"],html.theme-monochromatic [class*="bg-purple-"],html.theme-monochromatic [class*="bg-indigo-"],html.theme-monochromatic [class*="bg-fuchsia-"] { background:var(--theme-surface-3)!important;color:var(--theme-text)!important; }
+
+/* Light: nunca usar blanco como texto de contenido. */
+html.theme-light .text-white,html.theme-light .text-slate-50,html.theme-light .text-slate-100,html.theme-light .text-slate-200 { color:var(--theme-text-strong)!important; }
+html.theme-light .text-slate-300,html.theme-light .text-slate-400 { color:var(--theme-muted)!important; }
+html.theme-light .text-slate-500 { color:var(--theme-dim)!important; }
+html.theme-light .bg-white { background:#fff!important;color:var(--theme-text)!important; }
+html.theme-light .border-white,html.theme-light .border-white\/10,html.theme-light .border-white\/20 { border-color:var(--theme-line)!important; }
+
+/* Sepia: también traduce azules/cianes de componentes antiguos. */
+html.theme-sepia .text-cyan-400,html.theme-sepia .text-blue-400,html.theme-sepia .text-sky-400,html.theme-sepia .text-indigo-400 { color:var(--theme-savings)!important; }
+html.theme-sepia .bg-cyan-500,html.theme-sepia .bg-blue-500,html.theme-sepia .bg-sky-500,html.theme-sepia .bg-indigo-500 { background:var(--theme-savings)!important;color:#fff8ea!important; }
+
+/* Cyberpunk: reemplaza acentos azules/verdes heredados por neón. */
+html.theme-cyberpunk .text-blue-400,html.theme-cyberpunk .text-indigo-400 { color:#00f5ff!important; }
+html.theme-cyberpunk .text-cyan-400 { color:#00f5ff!important; }
+html.theme-cyberpunk .text-purple-400,html.theme-cyberpunk .text-fuchsia-400 { color:#ff2bd6!important; }
+html.theme-cyberpunk .bg-blue-500,html.theme-cyberpunk .bg-indigo-500 { background:#00f5ff!important;color:#100018!important; }
+html.theme-cyberpunk .bg-purple-500,html.theme-cyberpunk .bg-fuchsia-500 { background:#ff2bd6!important;color:#100018!important; }
+
+/* Iconos, divisores y elementos auxiliares usan siempre la paleta activa. */
+html[class*="theme-"] hr { border-color:var(--theme-line)!important; }
+html[class*="theme-"] .divide-slate-700 > :not([hidden]) ~ :not([hidden]) { border-color:var(--theme-line)!important; }
+html[class*="theme-"] .ring-emerald-500,html[class*="theme-"] .ring-emerald-400 { --tw-ring-color:var(--theme-accent)!important; }
+</style>
+
 </head>
 <body class="bg-nexus-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-white" data-source="12">
 
@@ -2824,22 +3292,59 @@
                         </button>
                     </div>
 
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group config-module-card config-section-hero">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400"><i class="fa-solid fa-sliders mr-1"></i> Configuración</span>
-                        <h2 class="text-lg font-black text-slate-100">Personalización del Sistema y Datos</h2>
+                        <div class="nexus-module-header config-unified-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon config-hero-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-sliders"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-emerald-400"><span>CONFIGURACIÓN</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                    <h3 class="nexus-module-title">Personalización del Sistema y Datos</h3>
+                                    <p class="nexus-module-desc">Configura tu perfil, cajas, categorías y respaldo de información</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selector de apariencia -->
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.005] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden config-module-card">
+                        <div class="absolute right-0 top-0 bottom-0 w-1.5" style="background:var(--theme-accent,#10b981)"></div>
+                        <div class="nexus-module-header config-unified-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon" style="color:var(--theme-accent,#10b981);border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-palette"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-emerald-400"><span>APARIENCIA</span><span class="nexus-module-dot" style="background:var(--theme-accent,#10b981);"></span></div>
+                                    <h3 class="nexus-module-title">Tema de la Interfaz</h3>
+                                    <p class="nexus-module-desc">Elige la apariencia visual de Nexus Wealth. La selección se guarda automáticamente.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="theme-selector" class="theme-selector-grid">
+                            <button type="button" class="theme-option" data-theme="light" onclick="applyTheme('light')"><span class="theme-dot theme-dot-light"></span><strong>Light Mode</strong><span>Claro y limpio</span></button>
+                            <button type="button" class="theme-option" data-theme="dark" onclick="applyTheme('dark')"><span class="theme-dot theme-dot-dark"></span><strong>Dark Mode</strong><span>Actual</span></button>
+                            <button type="button" class="theme-option" data-theme="high-contrast" onclick="applyTheme('high-contrast')"><span class="theme-dot theme-dot-contrast"></span><strong>High Contrast</strong><span>Máxima legibilidad</span></button>
+                            <button type="button" class="theme-option" data-theme="sepia" onclick="applyTheme('sepia')"><span class="theme-dot theme-dot-sepia"></span><strong>Sepia Mode</strong><span>Cálido y suave</span></button>
+                            <button type="button" class="theme-option" data-theme="cyberpunk" onclick="applyTheme('cyberpunk')"><span class="theme-dot theme-dot-cyber"></span><strong>Cyberpunk/Neon</strong><span>Neón futurista</span></button>
+                            <button type="button" class="theme-option" data-theme="monochromatic" onclick="applyTheme('monochromatic')"><span class="theme-dot theme-dot-mono"></span><strong>Monochromatic</strong><span>Escala de grises</span></button>
+                        </div>
                     </div>
 
                     <!-- Bloques de perfil y cajas reorganizados para aprovechar todo el ancho -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                         <!-- Perfil de Usuario -->
-                        <div class="md:col-span-5 self-start bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                        <div class="md:col-span-5 self-start bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden config-module-card">
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
-                            <div class="space-y-4">
-                                <div>
-                                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-user text-emerald-400 mr-2"></i> Perfil de Usuario</h3>
-                                    <p class="text-[10px] text-slate-500 mt-1">Identidad que se muestra en el panel principal.</p>
+                            <div class="nexus-module-header config-unified-header">
+                                <div class="nexus-module-header-main">
+                                    <div class="nexus-module-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-user"></i></div>
+                                    <div class="nexus-module-copy">
+                                        <div class="nexus-module-eyebrow text-emerald-400"><span>IDENTIDAD</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                        <h3 class="nexus-module-title">Perfil de Usuario</h3>
+                                        <p class="nexus-module-desc">Identidad que se muestra en el panel principal</p>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="space-y-4">
                                 <div>
                                     <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-extrabold">Nombre del Usuario</label>
                                     <input type="text" id="cfg-user-name" placeholder="Tu nombre..." class="w-full bg-nexus-900 border border-nexus-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
@@ -2849,16 +3354,20 @@
                         </div>
 
                         <!-- Nombre de las Cajas -->
-                        <div class="md:col-span-7 bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                        <div class="md:col-span-7 bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden config-module-card">
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
-                            <div class="space-y-4">
-                                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                                    <div>
-                                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-box-archive text-emerald-400 mr-2"></i> Nombre de las Cajas</h3>
-                                        <p class="text-[10px] text-slate-500 mt-1">Hasta 4 cajas activas. Puedes renombrarlas en cualquier momento.</p>
+                            <div class="nexus-module-header config-unified-header">
+                                <div class="nexus-module-header-main">
+                                    <div class="nexus-module-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-box-archive"></i></div>
+                                    <div class="nexus-module-copy">
+                                        <div class="nexus-module-eyebrow text-emerald-400"><span>PATRIMONIO</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                        <h3 class="nexus-module-title">Nombre de las Cajas</h3>
+                                        <p class="nexus-module-desc">Administra hasta 4 cajas activas y personaliza sus nombres</p>
                                     </div>
-                                    <button id="btn-add-savings-box-settings" onclick="addSavingsBox()" class="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-2 rounded-xl text-xs uppercase tracking-wider transition-all"><i class="fa-solid fa-plus mr-1"></i> Crear Caja</button>
                                 </div>
+                                <button id="btn-add-savings-box-settings" onclick="addSavingsBox()" class="nexus-module-action-btn config-action-btn text-emerald-400 border border-emerald-500/20 bg-emerald-500/5"><i class="fa-solid fa-plus"></i> Crear Caja</button>
+                            </div>
+                            <div class="space-y-4">
                                 <div id="box-config-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                                 <button onclick="saveBoxNames()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md shadow-emerald-600/20"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar Nombres</button>
                             </div>
@@ -2868,9 +3377,18 @@
                     <!-- Categorías de Ingreso y Gasto -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Ingresos -->
-                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-teal-500 hover:shadow-lg hover:shadow-teal-500/10 group relative overflow-hidden">
+                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-teal-500 hover:shadow-lg hover:shadow-teal-500/10 group relative overflow-hidden config-module-card config-income-card">
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
-                            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-list text-teal-400 mr-2"></i> Categorías de Ingreso</h3>
+                            <div class="nexus-module-header config-unified-header">
+                                <div class="nexus-module-header-main">
+                                    <div class="nexus-module-icon" style="color:#2dd4bf;border-color:rgba(45,212,191,.28);background:linear-gradient(145deg,rgba(45,212,191,.16),rgba(45,212,191,.035));"><i class="fa-solid fa-list"></i></div>
+                                    <div class="nexus-module-copy">
+                                        <div class="nexus-module-eyebrow text-teal-400"><span>CLASIFICACIÓN</span><span class="nexus-module-dot" style="background:#2dd4bf;"></span></div>
+                                        <h3 class="nexus-module-title">Categorías de Ingreso</h3>
+                                        <p class="nexus-module-desc">Administra las categorías utilizadas para registrar tus ingresos</p>
+                                    </div>
+                                </div>
+                            </div>
                             <input type="hidden" id="edit-idx-income" value="">
                             <div class="space-y-3">
                                 <input type="text" id="new-inc-cat" placeholder="Nombre de categoría..." class="w-full bg-nexus-900 border border-nexus-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500">
@@ -2890,9 +3408,18 @@
                         </div>
 
                         <!-- Gastos -->
-                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-rose-500 hover:shadow-lg hover:shadow-rose-500/10 group relative overflow-hidden">
+                        <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm space-y-4 transition-all duration-300 hover:scale-[1.01] hover:border-rose-500 hover:shadow-lg hover:shadow-rose-500/10 group relative overflow-hidden config-module-card config-expense-card">
                             <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-rose-500"></div>
-                            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200"><i class="fa-solid fa-list text-rose-400 mr-2"></i> Categorías de Gasto</h3>
+                            <div class="nexus-module-header config-unified-header">
+                                <div class="nexus-module-header-main">
+                                    <div class="nexus-module-icon" style="color:#fb7185;border-color:rgba(251,113,133,.28);background:linear-gradient(145deg,rgba(251,113,133,.16),rgba(251,113,133,.035));"><i class="fa-solid fa-list"></i></div>
+                                    <div class="nexus-module-copy">
+                                        <div class="nexus-module-eyebrow text-rose-400"><span>CLASIFICACIÓN</span><span class="nexus-module-dot" style="background:#fb7185;"></span></div>
+                                        <h3 class="nexus-module-title">Categorías de Gasto</h3>
+                                        <p class="nexus-module-desc">Administra las categorías utilizadas para registrar tus gastos</p>
+                                    </div>
+                                </div>
+                            </div>
                             <input type="hidden" id="edit-idx-expense" value="">
                             <div class="space-y-3">
                                 <input type="text" id="new-exp-cat" placeholder="Nombre de categoría..." class="w-full bg-nexus-900 border border-nexus-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
@@ -2912,11 +3439,23 @@
                         </div>
                     </div>
 
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm flex flex-wrap items-center gap-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm flex flex-wrap items-center gap-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden config-module-card config-backup-card">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
+                        <div class="nexus-module-header config-unified-header config-backup-header w-full">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-database"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-emerald-400"><span>SEGURIDAD DE DATOS</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                    <h3 class="nexus-module-title">Respaldo y Gestión de Datos</h3>
+                                    <p class="nexus-module-desc">Exporta, importa o reinicia la información almacenada en el sistema</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-backup-actions w-full flex flex-wrap items-center gap-4">
                         <button onclick="exportData()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all"><i class="fa-solid fa-download mr-1"></i> Exportar JSON</button>
                         <label class="bg-nexus-700 hover:bg-nexus-600 text-slate-200 font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider cursor-pointer transition-all border border-nexus-600"><i class="fa-solid fa-upload mr-1"></i> Importar Datos <input type="file" onchange="importData(event)" class="hidden" accept=".json"></label>
                         <button onclick="resetData()" class="bg-rose-500/15 border border-rose-500/30 text-rose-400 hover:bg-rose-500/25 font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all ml-auto"><i class="fa-solid fa-trash mr-1"></i> Reiniciar Base</button>
+                        </div>
                     </div>
                 </div>
 
@@ -3098,7 +3637,7 @@
                     if (r.box === boxKey) total += Number(r.amount) || 0;
                 });
                 (p.transactions || []).forEach(t => {
-                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado' && (!resetAt || Number(t.id || 0) > resetAt)) {
+                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado') {
                         total -= Number(t.amount) || 0;
                     }
                 });
@@ -3200,7 +3739,7 @@
                 });
 
                 (p.transactions || []).forEach(t => {
-                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado') {
+                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado' && (!resetAt || Number(t.id || 0) > resetAt)) {
                         withdrawals.push({ ym, transaction: t, amount: Number(t.amount) || 0 });
                     }
                 });
@@ -3285,8 +3824,9 @@
                     saveDB();
                     renderSavingsView();
                     initAjustes();
+                    const deletedBoxName = db.boxNames[boxKey] || `Caja ${active.indexOf(boxKey) + 1}`;
                     showUndoAlert(
-                        `${boxKey} fue eliminada. Los registros de los meses y del Dashboard permanecen intactos.`,
+                        `La caja “${deletedBoxName}” fue eliminada. Los registros de los meses y del Dashboard permanecen intactos.`,
                         () => {
                             db = snapshot;
                             saveDB();
@@ -3407,6 +3947,10 @@
             const container = document.getElementById('nexus-toast-container');
             if (!container) return;
 
+            // Marca que la acción actual ya generó su propio aviso de deshacer.
+            // Esto evita duplicados cuando una eliminación ya usa showUndoAlert().
+            undoWasShownForPendingDelete = true;
+
             if (activeUndoTimer) clearInterval(activeUndoTimer);
             if (activeUndoToast) activeUndoToast.remove();
 
@@ -3449,6 +3993,23 @@
             }, 1000);
         }
 
+        let undoWasShownForPendingDelete = false;
+
+        function refreshAfterUndoRestore() {
+            try {
+                if (typeof renderDashboard === 'function') renderDashboard();
+                if (typeof renderPeriodsGrid === 'function') renderPeriodsGrid();
+                if (typeof renderPeriodDetailContent === 'function' && db.periods?.[currentActiveYM]) renderPeriodDetailContent();
+                if (typeof updateFixedBlockDisplay === 'function') updateFixedBlockDisplay();
+                if (typeof renderDebts === 'function') renderDebts();
+                if (typeof renderSavingsView === 'function') renderSavingsView();
+                if (typeof initAjustes === 'function') initAjustes();
+                if (typeof updateUserNameDisplay === 'function') updateUserNameDisplay();
+            } catch (err) {
+                console.warn('Nexus: no se pudo refrescar alguna vista tras deshacer.', err);
+            }
+        }
+
         function triggerDeleteConfirmation(message, callback) {
             document.getElementById('delete-confirm-text').innerText = message;
             pendingDeleteCallback = callback;
@@ -3465,7 +4026,26 @@
                 const callback = pendingDeleteCallback;
                 pendingDeleteCallback = null;
                 document.getElementById('delete-confirm-modal').classList.add('hidden');
+
+                // Capturamos el estado ANTES de cualquier eliminación.
+                // Así, incluso si una nueva acción de eliminar todavía no tiene
+                // su propio showUndoAlert(), el sistema le proporciona
+                // automáticamente la misma ventana de 10 segundos.
+                const deleteSnapshot = JSON.parse(JSON.stringify(db));
+                undoWasShownForPendingDelete = false;
+
                 callback();
+
+                if (!undoWasShownForPendingDelete) {
+                    showUndoAlert(
+                        'Elemento eliminado correctamente.',
+                        () => {
+                            db = deleteSnapshot;
+                            saveDB();
+                            refreshAfterUndoRestore();
+                        }
+                    );
+                }
             }
         });
 
@@ -3566,11 +4146,45 @@
             document.body.classList.remove('overflow-hidden');
         }
 
+        function getThemeVar(name, fallback='') {
+            const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+            return value || fallback;
+        }
+
+        function hexToRgba(color, alpha) {
+            if (!color) return `rgba(0,0,0,${alpha})`;
+            if (color.startsWith('rgb')) return color;
+            const hex = color.replace('#','');
+            if (![3,6].includes(hex.length)) return color;
+            const full = hex.length === 3 ? hex.split('').map(c=>c+c).join('') : hex;
+            const n = parseInt(full,16);
+            return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${alpha})`;
+        }
+
         function applyTheme(mode) {
-            themeMode = 'dark';
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light-mode');
-            localStorage.setItem('nexus_theme', 'dark');
+            const validThemes = ['light','dark','high-contrast','sepia','cyberpunk','monochromatic'];
+            if (!validThemes.includes(mode)) mode = 'dark';
+            themeMode = mode;
+            const root = document.documentElement;
+            root.classList.add('dark');
+            root.classList.remove('light-mode','theme-light','theme-dark','theme-high-contrast','theme-sepia','theme-cyberpunk','theme-monochromatic');
+            root.classList.add(`theme-${mode}`);
+            if (mode === 'light') root.classList.add('light-mode');
+            localStorage.setItem('nexus_theme', mode);
+            document.querySelectorAll('#theme-selector .theme-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === mode);
+                btn.setAttribute('aria-pressed', btn.dataset.theme === mode ? 'true' : 'false');
+            });
+            // Redibuja la vista activa para que gráficos y métricas adopten el tema actual.
+            try {
+                if (typeof activeAppView !== 'undefined') {
+                    if (activeAppView === 'dashboard' && typeof renderDashboard === 'function') renderDashboard();
+                    else if (activeAppView === 'periodos' && typeof renderPeriodsGrid === 'function') renderPeriodsGrid();
+                    else if (activeAppView === 'pasivos' && typeof renderDebts === 'function') renderDebts();
+                    else if (activeAppView === 'cajas' && typeof renderSavingsView === 'function') renderSavingsView();
+                    else if (activeAppView === 'ajustes' && typeof initAjustes === 'function') initAjustes();
+                }
+            } catch (e) { console.warn('Nexus: no se pudo refrescar el tema.', e); }
         }
 
         function getDashboardPeriodKeys() {
@@ -3763,10 +4377,10 @@
                         labels: [['Ingresos', 'Totales'], ['Gastos', 'Totales'], ['Balance', 'Neto']],
                         datasets: [{
                             data: [totalInc, totalExp, netBalance],
-                            borderColor: '#34d399',
-                            backgroundColor: 'rgba(16,185,129,0.10)',
-                            pointBackgroundColor: ['#2dd4bf', '#fb7185', '#10b981'],
-                            pointBorderColor: '#111827',
+                            borderColor: getThemeVar('--theme-positive', '#34d399'),
+                            backgroundColor: hexToRgba(getThemeVar('--theme-positive', '#34d399'), 0.10),
+                            pointBackgroundColor: [getThemeVar('--theme-positive', '#2dd4bf'), getThemeVar('--theme-negative', '#fb7185'), getThemeVar('--theme-positive', '#10b981')],
+                            pointBorderColor: getThemeVar('--theme-text-strong', '#111827'),
                             pointBorderWidth: 2,
                             pointRadius: 5,
                             pointHoverRadius: 7,
@@ -3783,7 +4397,7 @@
                             x: { 
                                 grid: { display: false }, 
                                 ticks: { 
-                                    color: '#94a3b8', 
+                                    color: getThemeVar('--theme-muted', '#94a3b8'), 
                                     font: { size: window.innerWidth < 640 ? 9 : 10 },
                                     autoSkip: false,
                                     padding: window.innerWidth < 640 ? 12 : 10,
@@ -3797,7 +4411,7 @@
                                     }
                                 } 
                             },
-                            y: { grid: { color: '#1f293d' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+                            y: { grid: { color: getThemeVar('--theme-line', '#1f293d') }, ticks: { color: getThemeVar('--theme-muted', '#94a3b8'), font: { size: 10 } } }
                         }
                     }
                 });
@@ -4091,7 +4705,7 @@
                 });
 
                 (p.transactions || []).forEach(t => {
-                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado') {
+                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado' && (!resetAt || Number(t.id || 0) > resetAt)) {
                         listHtml += `
                             <div class="bg-nexus-900 p-3 rounded-xl border border-nexus-700 flex justify-between items-center text-xs">
                                 <div>
@@ -4291,10 +4905,10 @@
                     datasets: [{
                         label: 'Acumulado en Cajas',
                         data: dataValues,
-                        borderColor: '#34d399',
-                        backgroundColor: 'rgba(16,185,129,0.10)',
-                        pointBackgroundColor: '#10b981',
-                        pointBorderColor: themeMode === 'light' ? '#ffffff' : '#111827',
+                        borderColor: getThemeVar('--theme-savings', '#34d399'),
+                        backgroundColor: hexToRgba(getThemeVar('--theme-savings', '#34d399'), 0.10),
+                        pointBackgroundColor: getThemeVar('--theme-savings', '#10b981'),
+                        pointBorderColor: getThemeVar('--theme-text-strong', '#111827'),
                         pointBorderWidth: 2,
                         pointRadius: 4,
                         pointHoverRadius: 6,
@@ -4317,8 +4931,8 @@
                         tension: { duration: 1200, easing: 'easeOutCubic' }
                     },
                     scales: {
-                        x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 10 } } },
-                        y: { grid: { color: '#1f293d' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+                        x: { grid: { display: false }, ticks: { color: getThemeVar('--theme-muted', '#94a3b8'), font: { size: 10 } } },
+                        y: { grid: { color: getThemeVar('--theme-line', '#1f293d') }, ticks: { color: getThemeVar('--theme-muted', '#94a3b8'), font: { size: 10 } } }
                     }
                 }
             });
@@ -4394,10 +5008,14 @@
 
         function deletePeriod(ym) {
             triggerDeleteConfirmation(`¿Estás seguro de eliminar el periodo ${formatMonthName(ym)}? Se perderán sus registros asociados.`, () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 delete db.periods[ym];
                 saveDB();
                 renderPeriodsGrid();
-                showNexusAlert('Periodo eliminado con éxito.', 'update');
+                showUndoAlert(
+                    `El periodo ${formatMonthName(ym)} fue eliminado.`,
+                    () => { db = snapshot; saveDB(); renderPeriodsGrid(); }
+                );
             });
         }
 
@@ -4577,12 +5195,16 @@
 
         function deleteBoxRecord(id) {
             triggerDeleteConfirmation('¿Estás seguro de eliminar este aporte a caja?', () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 const p = db.periods[currentActiveYM];
                 if (p && p.savingsRecords) {
                     p.savingsRecords = p.savingsRecords.filter(r => r.id !== id);
                     saveDB();
                     renderPeriodDetailContent();
-                    showNexusAlert('Registro de aporte eliminado.', 'update');
+                    showUndoAlert(
+                        'Registro de aporte eliminado.',
+                        () => { db = snapshot; saveDB(); renderPeriodDetailContent(); }
+                    );
                 }
             });
         }
@@ -4619,6 +5241,7 @@
 
         function deleteFixedRecord(type, id) {
             triggerDeleteConfirmation('¿Estás seguro de eliminar este movimiento fijo?', () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 const p = db.periods[currentActiveYM];
                 if (p && p.fixedBlock) {
                     if (type === 'planned' && p.fixedBlock.plannedRecords) {
@@ -4629,7 +5252,10 @@
                     saveDB();
                     updateFixedBlockDisplay();
                     renderPeriodDetailContent();
-                    showNexusAlert('Movimiento fijo eliminado.', 'update');
+                    showUndoAlert(
+                        'Movimiento fijo eliminado.',
+                        () => { db = snapshot; saveDB(); updateFixedBlockDisplay(); renderPeriodDetailContent(); }
+                    );
                 }
             });
         }
@@ -4732,6 +5358,7 @@
 
         function deleteTransaction(id) {
             triggerDeleteConfirmation('¿Estás seguro de eliminar este movimiento financiero?', () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 const p = db.periods[currentActiveYM];
                 if (p && p.transactions) {
                     const tx = p.transactions.find(t => t.id === id);
@@ -4745,7 +5372,10 @@
                     saveDB();
                     renderPeriodDetailContent();
                     updateFixedBlockDisplay();
-                    showNexusAlert('Movimiento eliminado.', 'update');
+                    showUndoAlert(
+                        'Movimiento financiero eliminado.',
+                        () => { db = snapshot; saveDB(); renderPeriodDetailContent(); updateFixedBlockDisplay(); }
+                    );
                 }
             });
         }
@@ -5138,8 +5768,8 @@
                 if (categoryChartInstance) categoryChartInstance.destroy();
                 categoryChartInstance = new Chart(canvas.getContext('2d'), {
                     type: 'line',
-                    data: { labels, datasets: [{ label: categoryType === 'income' ? 'Ingresos' : 'Gastos', data: values, borderColor: categoryType === 'income' ? '#2dd4bf' : '#fb7185', backgroundColor: categoryType === 'income' ? 'rgba(45,212,191,.10)' : 'rgba(251,113,133,.10)', pointBackgroundColor: categoryType === 'income' ? '#2dd4bf' : '#fb7185', pointBorderColor: themeMode === 'light' ? '#fff' : '#111827', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7, tension: .3, fill: true }] },
-                    options: { responsive:true, maintainAspectRatio:false, animation:{ duration:900, easing:'easeOutQuart', delay: context => context.dataIndex * 70 }, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => `${formatCurrency(ctx.parsed.y)}` } } }, scales:{ x:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size: window.innerWidth < 640 ? 9 : 10}, autoSkip:false, maxRotation:0, minRotation:0, align:'center', crossAlign:'center', padding:10}}, y:{grid:{color: themeMode === 'light' ? '#dfe4ec' : '#1f293d'}, ticks:{color:'#94a3b8', font:{size:10}}} } }
+                    data: { labels, datasets: [{ label: categoryType === 'income' ? 'Ingresos' : 'Gastos', data: values, borderColor: categoryType === 'income' ? getThemeVar('--theme-positive', '#2dd4bf') : getThemeVar('--theme-negative', '#fb7185'), backgroundColor: categoryType === 'income' ? hexToRgba(getThemeVar('--theme-positive', '#2dd4bf'), .10) : hexToRgba(getThemeVar('--theme-negative', '#fb7185'), .10), pointBackgroundColor: categoryType === 'income' ? getThemeVar('--theme-positive', '#2dd4bf') : getThemeVar('--theme-negative', '#fb7185'), pointBorderColor: getThemeVar('--theme-text-strong', '#111827'), pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7, tension: .3, fill: true }] },
+                    options: { responsive:true, maintainAspectRatio:false, animation:{ duration:900, easing:'easeOutQuart', delay: context => context.dataIndex * 70 }, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => `${formatCurrency(ctx.parsed.y)}` } } }, scales:{ x:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size: window.innerWidth < 640 ? 9 : 10}, autoSkip:false, maxRotation:0, minRotation:0, align:'center', crossAlign:'center', padding:10}}, y:{grid:{color:getThemeVar('--theme-line', '#1f293d')}, ticks:{color:'#94a3b8', font:{size:10}}} } }
                 });
             }, 50);
         }
@@ -5175,10 +5805,14 @@
 
         function deleteDebt(id) {
             triggerDeleteConfirmation('¿Estás seguro de eliminar este compromiso de deuda?', () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 db.debts = db.debts.filter(d => d.id !== id);
                 saveDB();
                 renderDebts();
-                showNexusAlert('Deuda eliminada.', 'update');
+                showUndoAlert(
+                    'Deuda eliminada.',
+                    () => { db = snapshot; saveDB(); renderDebts(); }
+                );
             });
         }
 
@@ -5230,13 +5864,14 @@
             const grid = document.getElementById('savings-boxes-grid');
             if (grid) {
                 grid.innerHTML = active.map((key, idx) => {
-                    const colors = ['emerald','teal','emerald','amber'];
-                    const color = colors[idx] || 'emerald';
+                    const colors = ['purple','violet','indigo','purple'];
+                    const color = colors[idx] || 'purple';
+                    const boxName = db.boxNames[key] || `Caja ${idx + 1}`;
+                    const safeBoxName = String(boxName).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
                     return `<div onclick="openSavingsBoxModal('${key}')" class="savings-box-card bg-nexus-800 border border-${color}-500/30 p-5 rounded-2xl shadow-sm space-y-3 relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-${color}-500 hover:shadow-lg group cursor-pointer">
-                        <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-${color}-500"></div>
-                        <div class="flex items-center justify-between"><span class="text-[10px] uppercase tracking-wider text-${color}-400 font-extrabold">Caja ${idx+1}</span><div class="flex items-center gap-2"><i class="fa-solid fa-vault text-${color}-400"></i><button onclick="event.stopPropagation(); resetSavingsBox('${key}')" class="text-slate-500 hover:text-amber-400 p-1" title="Reiniciar caja"><i class="fa-solid fa-rotate-right text-[10px]"></i></button><button onclick="event.stopPropagation(); removeSavingsBox('${key}')" class="${active.length <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-1" title="Eliminar caja (solo con saldo $0,00)"><i class="fa-solid fa-trash text-[10px]"></i></button></div></div>
-                        <h3 class="text-xl font-black text-${color}-400">${formatCurrency(totalsGlobal[key])}</h3>
-                        <span class="text-[10px] text-slate-400">${db.boxNames[key] || key} · Ver movimientos <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-${color}-500"></div>
+                        <div class="flex items-center justify-between gap-3"><div class="min-w-0"><span class="block text-[9px] uppercase tracking-[0.18em] text-slate-500 font-extrabold">Caja ${idx+1}</span><h3 class="mt-0.5 text-base sm:text-lg font-black text-slate-100 truncate" title="${safeBoxName}">${safeBoxName}</h3></div><div class="flex items-center gap-2 shrink-0"><i class="fa-solid fa-vault text-${color}-400"></i><button onclick="event.stopPropagation(); resetSavingsBox('${key}')" class="text-slate-500 hover:text-amber-400 p-1" title="Reiniciar caja"><i class="fa-solid fa-rotate-right text-[10px]"></i></button><button onclick="event.stopPropagation(); removeSavingsBox('${key}')" class="${active.length <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-1" title="Eliminar caja (solo con saldo $0,00)"><i class="fa-solid fa-trash text-[10px]"></i></button></div></div>
+                        <div><div class="text-xl font-black text-${color}-400">${formatCurrency(totalsGlobal[key])}</div><span class="text-[10px] text-slate-400">Ver movimientos <i class="fa-solid fa-arrow-right ml-1"></i></span></div>
                     </div>`;
                 }).join('');
             }
@@ -5248,7 +5883,7 @@
                 const bt = getPeriodBoxTotals(ym);
                 const pTot = active.reduce((sum,k) => sum + Number(bt[k] || 0), 0);
                 if (pTot === 0 && active.every(k => Number(bt[k] || 0) === 0)) return;
-                tbody.innerHTML += `<tr class="hover:bg-nexus-900/60 transition-all"><td class="px-4 py-3 font-bold uppercase text-slate-200">${formatMonthName(ym)}</td>${active.map(k => `<td class="px-4 py-3 text-emerald-400 font-bold">${formatCurrency(bt[k] || 0)}</td>`).join('')}<td class="px-4 py-3 text-right font-black text-slate-100">${formatCurrency(pTot)}</td></tr>`;
+                tbody.innerHTML += `<tr class="hover:bg-nexus-900/60 transition-all"><td class="px-4 py-3 font-bold uppercase text-slate-200">${formatMonthName(ym)}</td>${active.map(k => `<td class="px-4 py-3 text-purple-400 font-bold">${formatCurrency(bt[k] || 0)}</td>`).join('')}<td class="px-4 py-3 text-right font-black text-slate-100">${formatCurrency(pTot)}</td></tr>`;
             });
             if (!tbody.innerHTML) tbody.innerHTML = `<tr><td colspan="${active.length + 2}" class="px-4 py-4 text-center text-slate-500 text-xs">Sin registros de ahorros.</td></tr>`;
             const table = tbody.closest('table');
@@ -5427,10 +6062,14 @@
                 return;
             }
             triggerDeleteConfirmation('¿Estás seguro de eliminar esta categoría?', () => {
+                const snapshot = JSON.parse(JSON.stringify(db));
                 db.categories[type].splice(idx, 1);
                 saveDB();
                 renderCategoriesList(type);
-                showNexusAlert('Categoría eliminada.', 'update');
+                showUndoAlert(
+                    'Categoría eliminada.',
+                    () => { db = snapshot; saveDB(); renderCategoriesList(type); }
+                );
             });
         }
 
@@ -5880,6 +6519,136 @@
     height: auto !important;
     flex: 0 0 auto !important;
 }
+</style>
+
+
+<style id="nexus-dark-semantic-audit-v5">
+/* ================================================================
+   NEXUS WEALTH — DARK MODE SEMANTIC COLOR AUDIT V5
+   Regla estricta:
+   Verde = positivo/ingresos
+   Naranja = negativo/gastos
+   Morado = ahorros
+   Cian = disponible
+   Amarillo = deudas/alertas/objetivos
+   Gris = estructura/neutro
+   Este bloque corrige cualquier color heredado dentro de módulos
+   cuyo contexto financiero ya es inequívoco.
+================================================================ */
+html.theme-dark {
+  --positive:#44cf72;
+  --positive-soft:#2eaa58;
+  --positive-bright:#6ee596;
+  --negative:#fe6402;
+  --negative-soft:#c84d00;
+  --negative-bright:#ff8a3d;
+  --savings:#8856ed;
+  --savings-soft:#6939bd;
+  --savings-bright:#ab83f5;
+  --available:#18c7fe;
+  --available-soft:#079dce;
+  --available-bright:#62ddff;
+  --debt:#f7b336;
+  --debt-bright:#ffd46e;
+  --neutral:#414551;
+}
+
+/* ===== AHORROS: ningún verde/turquesa debe sobrevivir aquí ===== */
+html.theme-dark #view-cajas [class*="text-emerald-"],
+html.theme-dark #view-cajas [class*="text-teal-"],
+html.theme-dark #view-cajas [class*="text-green-"],
+html.theme-dark #view-cajas [class*="text-cyan-"],
+html.theme-dark #view-cajas [class*="text-blue-"] {
+  color:var(--savings)!important;
+}
+html.theme-dark #view-cajas [class*="bg-emerald-"],
+html.theme-dark #view-cajas [class*="bg-teal-"],
+html.theme-dark #view-cajas [class*="bg-green-"],
+html.theme-dark #view-cajas [class*="bg-cyan-"],
+html.theme-dark #view-cajas [class*="bg-blue-"] {
+  background-color:var(--savings)!important;
+  color:#fff!important;
+}
+html.theme-dark #view-cajas [class*="border-emerald-"],
+html.theme-dark #view-cajas [class*="border-teal-"],
+html.theme-dark #view-cajas [class*="border-green-"],
+html.theme-dark #view-cajas [class*="border-cyan-"],
+html.theme-dark #view-cajas [class*="border-blue-"] {
+  border-color:rgba(136,86,237,.48)!important;
+}
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) [class*="text-purple-"],
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) [class*="text-violet-"] { color:#8856ed!important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) [class*="text-purple-"],
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) [class*="text-violet-"] { color:#ab83f5!important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) [class*="text-purple-"],
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) [class*="text-violet-"] { color:#6939bd!important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) [class*="text-purple-"],
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) [class*="text-violet-"] { color:#8856ed!important; }
+html.theme-dark #view-cajas #savings-history-tbody [class*="text-emerald-"],
+html.theme-dark #view-cajas #savings-history-tbody [class*="text-teal-"],
+html.theme-dark #view-cajas #savings-history-tbody [class*="text-green-"] { color:var(--savings)!important; }
+
+/* ===== PANEL AHORROS DEL DETALLE: morado de punta a punta ===== */
+html.theme-dark #view-period-detail .detail-savings-panel [class*="text-emerald-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="text-teal-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="text-cyan-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="text-blue-"] { color:var(--savings)!important; }
+html.theme-dark #view-period-detail .detail-savings-panel [class*="bg-emerald-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="bg-teal-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="bg-cyan-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="bg-blue-"] { background-color:var(--savings)!important;color:#fff!important; }
+html.theme-dark #view-period-detail .detail-savings-panel [class*="border-emerald-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="border-teal-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="border-cyan-"],
+html.theme-dark #view-period-detail .detail-savings-panel [class*="border-blue-"] { border-color:rgba(136,86,237,.48)!important; }
+
+/* ===== GASTO FIJO: ningún verde/turquesa debe identificar gasto ===== */
+html.theme-dark #view-period-detail .fixed-redesign [class*="text-emerald-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="text-teal-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="text-green-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="text-cyan-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="text-blue-"] { color:var(--negative)!important; }
+html.theme-dark #view-period-detail .fixed-redesign [class*="bg-emerald-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="bg-teal-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="bg-green-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="bg-cyan-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="bg-blue-"] { background-color:var(--negative)!important;color:#fff!important; }
+html.theme-dark #view-period-detail .fixed-redesign [class*="border-emerald-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="border-teal-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="border-green-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="border-cyan-"],
+html.theme-dark #view-period-detail .fixed-redesign [class*="border-blue-"] { border-color:rgba(254,100,2,.48)!important; }
+html.theme-dark #view-period-detail .fixed-redesign .savings-submit-btn { background:linear-gradient(135deg,#c84d00,#fe6402)!important;border-color:rgba(254,100,2,.42)!important;color:#fff!important; }
+html.theme-dark #view-period-detail .fixed-redesign .savings-entry-number { background:rgba(254,100,2,.12)!important;color:#fe6402!important; }
+
+/* ===== DETALLE DE GASTOS: forzar naranja incluso en piezas antiguas ===== */
+html.theme-dark #view-period-detail #detail-expense-list [class*="text-emerald-"],
+html.theme-dark #view-period-detail #detail-expense-list [class*="text-teal-"],
+html.theme-dark #view-period-detail #detail-expense-list [class*="text-green-"] { color:var(--negative)!important; }
+html.theme-dark #view-period-detail #detail-total-expense-block { color:var(--negative)!important; }
+
+/* ===== DISPONIBLE: no debe heredar verde por estilos antiguos ===== */
+html.theme-dark #view-period-detail #detail-available-amount,
+html.theme-dark [data-financial-type="available"] { color:var(--available)!important; }
+html.theme-dark #view-period-detail [id*="available"] [class*="text-emerald-"],
+html.theme-dark #view-period-detail [id*="available"] [class*="text-teal-"] { color:var(--available)!important; }
+
+/* ===== INGRESOS: solo aquí el verde es protagonista ===== */
+html.theme-dark #view-period-detail #detail-income-list [class*="text-emerald-"],
+html.theme-dark #view-period-detail #detail-income-list [class*="text-teal-"],
+html.theme-dark #view-period-detail #detail-total-income-block { color:var(--positive)!important; }
+
+/* ===== MOVIMIENTOS GENÉRICOS: neutral, no confundir con ingresos ===== */
+html.theme-dark #view-period-detail > .bg-nexus-800:last-of-type .nexus-module-eyebrow,
+html.theme-dark #view-period-detail > .bg-nexus-800:last-of-type .nexus-module-action-value { color:#a7b0bd!important; }
+html.theme-dark #view-period-detail > .bg-nexus-800:last-of-type .nexus-module-icon { color:#a7b0bd!important;border-color:rgba(65,69,81,.7)!important;background:rgba(65,69,81,.16)!important; }
+html.theme-dark #view-period-detail > .bg-nexus-800:last-of-type > .absolute { background:#414551!important; }
+
+/* ===== Gráficos: evitar paletas antiguas hardcodeadas ===== */
+html.theme-dark .chart-positive { --chart-color:#44cf72; }
+html.theme-dark .chart-negative { --chart-color:#fe6402; }
+html.theme-dark .chart-savings { --chart-color:#8856ed; }
+html.theme-dark .chart-available { --chart-color:#18c7fe; }
 </style>
 
 </body>
@@ -7152,4 +7921,303 @@
   #view-cajas .savings-breakdown-header .nexus-module-header-main { align-items:center !important; }
   #view-cajas .savings-breakdown-header .nexus-module-title { font-size:20px !important; }
 }
+</style>
+<style id="nexus-dark-identity-v4">
+/* ================================================================
+   NEXUS WEALTH — DARK MODE IDENTITY V4
+   Paleta solicitada por el usuario.
+   Verde  = positivo / ingresos
+   Naranja = negativo / gastos
+   Morado = ahorros
+   Cian   = disponible
+   Amarillo = deudas / alertas / objetivos
+   Gris   = estructura / neutral
+================================================================ */
+html.theme-dark {
+    --theme-bg:#070b12;
+    --theme-surface:#0d1420;
+    --theme-surface-2:#111a29;
+    --theme-surface-3:#172235;
+    --theme-input:#0b121d;
+    --theme-text:#f1f5f9;
+    --theme-text-strong:#ffffff;
+    --theme-muted:#a7b0bd;
+    --theme-dim:#747d8b;
+    --theme-line:#414551;
+    --theme-line-soft:rgba(65,69,81,.72);
+
+    --theme-positive:#44cf72;
+    --theme-positive-soft:#2eaa58;
+    --theme-positive-bright:#6ee596;
+
+    --theme-negative:#fe6402;
+    --theme-negative-soft:#c84d00;
+    --theme-negative-bright:#ff8a3d;
+
+    --theme-savings:#8856ed;
+    --theme-savings-soft:#6939bd;
+    --theme-savings-bright:#ab83f5;
+
+    --theme-available:#18c7fe;
+    --theme-available-soft:#079dce;
+    --theme-available-bright:#62ddff;
+
+    --theme-debt:#f7b336;
+    --theme-debt-soft:#c88c1d;
+    --theme-debt-bright:#ffd46e;
+
+    --theme-neutral:#414551;
+    --theme-neutral-bright:#69707d;
+    --theme-accent:#44cf72;
+    --theme-accent-2:#6ee596;
+    --theme-on-accent:#06120a;
+    --theme-overlay:rgba(0,0,0,.78);
+    --theme-shadow:rgba(0,0,0,.34);
+
+    /* Legacy visual tokens used by older Nexus blocks */
+    --nw-bg:#070b12;
+    --nw-surface:#0d1420;
+    --nw-surface-2:#111a29;
+    --nw-surface-3:#172235;
+    --nw-border:#414551;
+    --nw-border-soft:rgba(65,69,81,.72);
+    --nw-text:#f1f5f9;
+    --nw-muted:#a7b0bd;
+    --nw-dim:#747d8b;
+    --nw-green:#44cf72;
+    --nw-green-strong:#2eaa58;
+    --nw-green-soft:rgba(68,207,114,.11);
+    --nw-cyan:#18c7fe;
+    --nw-danger:#fe6402;
+    --nw-warning:#f7b336;
+}
+
+/* ---------- Superficies ---------- */
+html.theme-dark body,
+html.theme-dark #app-scroll { background:#070b12 !important; color:#f1f5f9 !important; }
+html.theme-dark #main-sidebar,
+html.theme-dark .bg-nexus-900 { background:#070b12 !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark .bg-nexus-800,
+html.theme-dark .bg-nexus-800\/80 { background:#0d1420 !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark .bg-nexus-700,
+html.theme-dark .bg-nexus-600 { background:#172235 !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark input,
+html.theme-dark select,
+html.theme-dark textarea,
+html.theme-dark .savings-field,
+html.theme-dark .savings-money-field { background:#0b121d !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark input::placeholder,
+html.theme-dark textarea::placeholder { color:#747d8b !important; opacity:1 !important; }
+html.theme-dark header { background:rgba(13,20,32,.96) !important; border-color:#414551 !important; }
+
+/* ---------- Tipografía: blancos legibles y jerarquía neutra ---------- */
+html.theme-dark .text-white,
+html.theme-dark .text-slate-50,
+html.theme-dark .text-slate-100,
+html.theme-dark .text-slate-200 { color:#f1f5f9 !important; }
+html.theme-dark .text-slate-300,
+html.theme-dark .text-slate-400 { color:#a7b0bd !important; }
+html.theme-dark .text-slate-500 { color:#747d8b !important; }
+
+/* ---------- POSITIVO / INGRESOS ---------- */
+html.theme-dark .text-emerald-400,
+html.theme-dark .text-emerald-300 { color:#44cf72 !important; }
+html.theme-dark .bg-emerald-500,
+html.theme-dark .bg-emerald-600 { background:#44cf72 !important; color:#06120a !important; }
+html.theme-dark .border-emerald-400,
+html.theme-dark .border-emerald-500 { border-color:#44cf72 !important; }
+html.theme-dark [class*="bg-emerald-500\\/10"],
+html.theme-dark [class*="bg-emerald-500\\/5"] { background:rgba(68,207,114,.11) !important; }
+html.theme-dark .hover\\:bg-emerald-500:hover { background:#6ee596 !important; }
+html.theme-dark .hover\\:border-emerald-500:hover { border-color:#44cf72 !important; }
+html.theme-dark .hover\\:text-emerald-300:hover { color:#6ee596 !important; }
+
+/* ---------- NEGATIVO / GASTOS ---------- */
+html.theme-dark .text-rose-400,
+html.theme-dark .text-rose-300 { color:#fe6402 !important; }
+html.theme-dark .bg-rose-500,
+html.theme-dark .bg-rose-600 { background:#fe6402 !important; color:#fff !important; }
+html.theme-dark .border-rose-400,
+html.theme-dark .border-rose-500 { border-color:#fe6402 !important; }
+html.theme-dark [class*="bg-rose-500\\/10"],
+html.theme-dark [class*="bg-rose-500\\/5"] { background:rgba(254,100,2,.11) !important; }
+html.theme-dark .hover\\:bg-rose-500:hover { background:#ff8a3d !important; }
+html.theme-dark .hover\\:border-rose-500:hover { border-color:#fe6402 !important; }
+html.theme-dark .hover\\:text-rose-300:hover { color:#ff8a3d !important; }
+
+/* ---------- AHORROS ---------- */
+html.theme-dark .text-purple-400,
+html.theme-dark .text-violet-400,
+html.theme-dark .text-indigo-400 { color:#8856ed !important; }
+html.theme-dark .bg-purple-500,
+html.theme-dark .bg-purple-600,
+html.theme-dark .bg-violet-500,
+html.theme-dark .bg-violet-600 { background:#8856ed !important; color:#fff !important; }
+html.theme-dark .border-purple-400,
+html.theme-dark .border-purple-500,
+html.theme-dark .border-violet-500 { border-color:#8856ed !important; }
+html.theme-dark [class*="bg-purple-500\\/10"],
+html.theme-dark [class*="bg-purple-500\\/5"],
+html.theme-dark [class*="bg-violet-500\\/10"],
+html.theme-dark [class*="bg-violet-500\\/5"] { background:rgba(136,86,237,.12) !important; }
+html.theme-dark .hover\\:bg-purple-500:hover,
+html.theme-dark .hover\\:bg-violet-500:hover { background:#ab83f5 !important; }
+html.theme-dark .hover\\:border-purple-500:hover,
+html.theme-dark .hover\\:border-violet-500:hover { border-color:#8856ed !important; }
+html.theme-dark .hover\\:text-purple-300:hover,
+html.theme-dark .hover\\:text-violet-300:hover { color:#ab83f5 !important; }
+
+/* Los antiguos verdes/turquesas de los módulos de ahorro se convierten en morado. */
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .text-emerald-400,
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .nexus-module-icon,
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .nexus-module-eyebrow { color:#8856ed !important; }
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .bg-emerald-500,
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .absolute { background:#8856ed !important; }
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] .section-icon-box { background:rgba(136,86,237,.12) !important; border-color:rgba(136,86,237,.34) !important; }
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"] { border-color:rgba(136,86,237,.48) !important; }
+html.theme-dark #view-dashboard [onclick*="openDashboardModal('savings')"]:hover { border-color:#8856ed !important; }
+html.theme-dark #view-dashboard .lg\\:col-span-2 { border-color:rgba(136,86,237,.32) !important; }
+html.theme-dark #view-dashboard .lg\\:col-span-2 .text-emerald-400 { color:#8856ed !important; }
+html.theme-dark #view-dashboard .lg\\:col-span-2 .bg-emerald-500 { background:#8856ed !important; }
+
+/* Cajas de ahorros: identidad morada, con variaciones para no saturar. */
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) { border-color:rgba(136,86,237,.60) !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) { border-color:rgba(171,131,245,.52) !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) { border-color:rgba(105,57,189,.62) !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) { border-color:rgba(136,86,237,.42) !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card .fa-vault,
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card h3 { color:#8856ed !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) .fa-vault,
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) h3 { color:#ab83f5 !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) .fa-vault,
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) h3 { color:#6939bd !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card > .absolute { background:#8856ed !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) > .absolute { background:#ab83f5 !important; }
+html.theme-dark #view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) > .absolute { background:#6939bd !important; }
+
+/* ---------- DISPONIBLE ---------- */
+html.theme-dark .text-cyan-400,
+html.theme-dark .text-cyan-300,
+html.theme-dark .text-sky-400 { color:#18c7fe !important; }
+html.theme-dark .bg-cyan-500,
+html.theme-dark .bg-cyan-600,
+html.theme-dark .bg-sky-500,
+html.theme-dark .bg-sky-600 { background:#18c7fe !important; color:#06131a !important; }
+html.theme-dark .border-cyan-400,
+html.theme-dark .border-cyan-500,
+html.theme-dark .border-sky-500 { border-color:#18c7fe !important; }
+html.theme-dark [class*="bg-cyan-500\\/10"],
+html.theme-dark [class*="bg-cyan-500\\/5"] { background:rgba(24,199,254,.11) !important; }
+
+/* Disponible del detalle y componentes identificados por sus IDs. */
+html.theme-dark #detail-available-amount { color:#18c7fe !important; }
+html.theme-dark #view-dashboard .dashboard-available,
+html.theme-dark [data-financial-type="available"] { color:#18c7fe !important; }
+
+/* ---------- DEUDAS / ALERTAS / OBJETIVOS ---------- */
+html.theme-dark .text-amber-400,
+html.theme-dark .text-amber-300,
+html.theme-dark .text-yellow-400 { color:#f7b336 !important; }
+html.theme-dark .bg-amber-500,
+html.theme-dark .bg-amber-600,
+html.theme-dark .bg-yellow-500,
+html.theme-dark .bg-yellow-600 { background:#f7b336 !important; color:#151005 !important; }
+html.theme-dark .border-amber-400,
+html.theme-dark .border-amber-500,
+html.theme-dark .border-yellow-500 { border-color:#f7b336 !important; }
+html.theme-dark [class*="bg-amber-500\\/10"],
+html.theme-dark [class*="bg-amber-500\\/5"] { background:rgba(247,179,54,.11) !important; }
+html.theme-dark .hover\\:bg-amber-500:hover { background:#ffd46e !important; }
+html.theme-dark .hover\\:border-amber-500:hover { border-color:#f7b336 !important; }
+html.theme-dark .hover\\:text-amber-300:hover { color:#ffd46e !important; }
+
+/* ---------- GRIS NEUTRO / ESTRUCTURA ---------- */
+html.theme-dark .border-nexus-700,
+html.theme-dark .border-nexus-700\/60,
+html.theme-dark .border-nexus-700\/65,
+html.theme-dark .border-nexus-700\/80,
+html.theme-dark .border-nexus-600 { border-color:#414551 !important; }
+html.theme-dark .hover\\:bg-nexus-700\\/50:hover { background:#172235 !important; }
+html.theme-dark .bg-black\/70 { background:rgba(0,0,0,.78) !important; }
+html.theme-dark .bg-black\/75 { background:rgba(0,0,0,.82) !important; }
+
+/* ---------- Dashboard: las 4 identidades deben ser obvias ---------- */
+/* Ingresos */
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1) { border-color:rgba(68,207,114,.42) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1) .text-teal-400 { color:#44cf72 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1) .bg-teal-500 { background:#44cf72 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1) .section-icon-box { color:#44cf72 !important; background:rgba(68,207,114,.12) !important; border-color:rgba(68,207,114,.34) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1) .absolute { background:#44cf72 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(1):hover { border-color:#44cf72 !important; }
+/* Gastos */
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2) { border-color:rgba(254,100,2,.42) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2) .text-rose-400 { color:#fe6402 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2) .bg-rose-500 { background:#fe6402 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2) .section-icon-box { color:#fe6402 !important; background:rgba(254,100,2,.12) !important; border-color:rgba(254,100,2,.34) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2) .absolute { background:#fe6402 !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(2):hover { border-color:#fe6402 !important; }
+/* Ahorros */
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3) { border-color:rgba(136,86,237,.46) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3) .text-emerald-400 { color:#8856ed !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3) .bg-emerald-500 { background:#8856ed !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3) .section-icon-box { color:#8856ed !important; background:rgba(136,86,237,.12) !important; border-color:rgba(136,86,237,.34) !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3) .absolute { background:#8856ed !important; }
+html.theme-dark #view-dashboard > .grid:first-child > div:nth-child(3):hover { border-color:#8856ed !important; }
+
+/* ---------- Detalle de periodo ---------- */
+/* Ingresos */
+html.theme-dark #view-period-detail .nexus-module-icon[style*="#2dd4bf"] { color:#44cf72 !important; border-color:rgba(68,207,114,.34) !important; background:linear-gradient(145deg,rgba(68,207,114,.16),rgba(68,207,114,.035)) !important; }
+html.theme-dark #view-period-detail .nexus-module-eyebrow.text-teal-400 { color:#44cf72 !important; }
+html.theme-dark #view-period-detail .nexus-module-dot[style*="#2dd4bf"] { background:#44cf72 !important; }
+html.theme-dark #view-period-detail .nexus-module-action[style*="45,212,191"] { border-color:rgba(68,207,114,.24) !important; background:rgba(68,207,114,.045) !important; }
+/* Gastos */
+html.theme-dark #view-period-detail .nexus-module-icon[style*="#fb7185"] { color:#fe6402 !important; border-color:rgba(254,100,2,.34) !important; background:linear-gradient(145deg,rgba(254,100,2,.16),rgba(254,100,2,.035)) !important; }
+html.theme-dark #view-period-detail .nexus-module-eyebrow.text-rose-400 { color:#fe6402 !important; }
+html.theme-dark #view-period-detail .nexus-module-dot[style*="#fb7185"] { background:#fe6402 !important; }
+/* Ahorros */
+html.theme-dark #view-period-detail .detail-savings-panel .nexus-module-icon { color:#8856ed !important; border-color:rgba(136,86,237,.34) !important; background:linear-gradient(145deg,rgba(136,86,237,.16),rgba(136,86,237,.035)) !important; }
+html.theme-dark #view-period-detail .detail-savings-panel .nexus-module-eyebrow,
+html.theme-dark #view-period-detail .detail-savings-panel .text-emerald-400 { color:#8856ed !important; }
+html.theme-dark #view-period-detail .detail-savings-panel .nexus-module-dot { background:#8856ed !important; }
+/* Gasto fijo = negativo, no turquesa */
+html.theme-dark #view-period-detail .fixed-redesign .text-teal-400 { color:#fe6402 !important; }
+html.theme-dark #view-period-detail .fixed-redesign .nexus-module-icon { color:#fe6402 !important; border-color:rgba(254,100,2,.34) !important; background:linear-gradient(145deg,rgba(254,100,2,.16),rgba(254,100,2,.035)) !important; }
+html.theme-dark #view-period-detail .fixed-redesign .nexus-module-dot { background:#fe6402 !important; }
+html.theme-dark #view-period-detail .fixed-redesign .fixed-redesign-accent { background:#fe6402 !important; }
+
+/* ---------- Pasivos / Deudas ---------- */
+html.theme-dark #view-pasivos .nexus-module-icon,
+html.theme-dark #view-pasivos .nexus-module-eyebrow.text-amber-400 { color:#f7b336 !important; }
+html.theme-dark #view-pasivos .nexus-module-icon { border-color:rgba(247,179,54,.34) !important; background:linear-gradient(145deg,rgba(247,179,54,.16),rgba(247,179,54,.035)) !important; }
+html.theme-dark #view-pasivos .nexus-module-dot { background:#f7b336 !important; }
+
+/* ---------- Configuración: neutral + amarillo, sin convertir todo en verde ---------- */
+html.theme-dark #view-ajustes .config-hero-icon,
+html.theme-dark #view-ajustes .config-module-card .nexus-module-icon { color:#f7b336 !important; border-color:rgba(247,179,54,.30) !important; background:linear-gradient(145deg,rgba(247,179,54,.14),rgba(247,179,54,.03)) !important; }
+html.theme-dark #view-ajustes .config-module-card .nexus-module-eyebrow.text-emerald-400 { color:#f7b336 !important; }
+html.theme-dark #view-ajustes .config-module-card .nexus-module-dot { background:#f7b336 !important; }
+html.theme-dark #view-ajustes .config-module-card { border-color:#414551 !important; }
+html.theme-dark #view-ajustes .config-module-card:hover { border-color:rgba(247,179,54,.58) !important; }
+
+/* ---------- Modales y botones ---------- */
+html.theme-dark #dashboard-modal > div,
+html.theme-dark #category-details-modal > div,
+html.theme-dark #delete-confirm-modal > div { background:#0d1420 !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark .theme-option { background:#111a29 !important; color:#f1f5f9 !important; border-color:#414551 !important; }
+html.theme-dark .theme-option:hover,
+html.theme-dark .theme-option.active { border-color:#44cf72 !important; }
+
+/* ---------- Scrollbar ---------- */
+html.theme-dark ::-webkit-scrollbar-track { background:#070b12 !important; }
+html.theme-dark ::-webkit-scrollbar-thumb { background:#414551 !important; }
+html.theme-dark ::-webkit-scrollbar-thumb:hover { background:#44cf72 !important; }
+
+/* ---------- Pequeñas piezas que usaban el turquesa viejo ---------- */
+html.theme-dark .savings-main-icon { color:#8856ed !important; background:linear-gradient(145deg,rgba(136,86,237,.18),rgba(136,86,237,.04)) !important; border-color:rgba(136,86,237,.30) !important; box-shadow:inset 0 0 20px rgba(136,86,237,.06) !important; }
+html.theme-dark .savings-status-dot { background:#8856ed !important; box-shadow:0 0 9px rgba(136,86,237,.65) !important; }
+html.theme-dark .savings-entry-number { background:rgba(136,86,237,.11) !important; color:#8856ed !important; }
+html.theme-dark .savings-submit-btn { border-color:rgba(136,86,237,.34) !important; background:linear-gradient(135deg,#6939bd,#8856ed) !important; color:#fff !important; }
+
+/* ---------- Chart.js hereda la identidad mediante variables ---------- */
+html.theme-dark .fixed-redesign-accent { background:#fe6402 !important; }
 </style>
