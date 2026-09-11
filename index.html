@@ -5582,13 +5582,24 @@
 @media (max-width: 900px) {
     #view-period-detail .fixed-workspace {
         grid-template-columns: 1fr !important;
-        grid-auto-rows: 280px !important;
+        grid-auto-rows: auto !important;
+        align-items: stretch !important;
     }
     #view-period-detail .fixed-workspace > .fixed-entry-card,
     #view-period-detail .fixed-workspace > .fixed-ledger-card {
-        height: 280px !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    #view-period-detail .fixed-entry-card {
+        padding: 13px 15px !important;
+    }
+    #view-period-detail .fixed-entry-card .fixed-submit-btn {
+        margin-top: 12px !important;
+    }
+    #view-period-detail .fixed-ledger-card {
         min-height: 280px !important;
-        max-height: 280px !important;
     }
 }
 </style>
@@ -5837,4 +5848,41 @@
 }
 </style>
 
+<style id="fixed-mobile-new-movement-final">
+/* FIX FINAL — Gastos Fijos: en móvil NUEVO MOVIMIENTO nunca se recorta */
+@media (max-width: 900px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    display:grid !important;
+    grid-template-columns: minmax(0,1fr) !important;
+    grid-auto-rows: auto !important;
+    height:auto !important;
+    overflow:visible !important;
+  }
+  #view-period-detail .fixed-redesign .fixed-entry-card {
+    display:flex !important;
+    flex-direction:column !important;
+    height:auto !important;
+    min-height:280px !important;
+    max-height:none !important;
+    overflow:visible !important;
+    box-sizing:border-box !important;
+  }
+  #view-period-detail .fixed-redesign .fixed-entry-card .savings-entry-heading,
+  #view-period-detail .fixed-redesign .fixed-entry-card > .space-y-2,
+  #view-period-detail .fixed-redesign .fixed-entry-card > .grid {
+    flex-shrink:0 !important;
+  }
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn {
+    flex-shrink:0 !important;
+    margin-top:12px !important;
+    height:43px !important;
+    min-height:43px !important;
+  }
+}
+@media (max-width: 639px) {
+  #view-period-detail .fixed-redesign > .relative { padding:14px 12px !important; }
+  #view-period-detail .fixed-redesign .fixed-workspace { padding:12px 0 16px !important; gap:10px !important; }
+  #view-period-detail .fixed-redesign .fixed-entry-card { min-height:280px !important; padding:13px !important; }
+}
+</style>
 </html>
