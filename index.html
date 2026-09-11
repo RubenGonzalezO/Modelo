@@ -5981,3 +5981,93 @@
   }
 }
 </style>
+
+<style id="mobile-fixed-final-layout-fix">
+/* AJUSTE FINAL MÓVIL — Gastos Fijos
+   1) El botón queda perfectamente centrado.
+   2) El formulario crece según su contenido.
+   3) El historial deja de reservar una segunda fila artificial de 390px,
+      eliminando el espacio vacío debajo del historial. */
+@media (max-width: 900px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-auto-rows: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: start !important;
+    gap: 10px !important;
+    overflow: visible !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-entry-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    align-self: start !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-ledger-card {
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+    overflow: hidden !important;
+    align-self: start !important;
+    box-sizing: border-box !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-ledger-card #detail-fixed-records-list {
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: stretch !important;
+    text-align: center !important;
+    gap: 6px !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    height: 43px !important;
+    min-height: 43px !important;
+    max-height: 43px !important;
+    flex: 0 0 43px !important;
+    padding: 0 12px !important;
+    line-height: 1 !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn i {
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+@media (max-width: 639px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    grid-template-rows: auto 280px !important;
+    grid-auto-rows: unset !important;
+    gap: 10px !important;
+    padding-bottom: 0 !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-entry-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 13px !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-ledger-card {
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+    padding: 13px !important;
+  }
+}
+</style>
