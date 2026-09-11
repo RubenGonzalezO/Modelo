@@ -5885,4 +5885,99 @@
   #view-period-detail .fixed-redesign .fixed-entry-card { min-height:280px !important; padding:13px !important; }
 }
 </style>
+
+<style id="fixed-mobile-register-visibility-final">
+/* FIX DEFINITIVO — Gastos Fijos: el botón Registrar monto debe quedar dentro del formulario en móvil. */
+@media (max-width: 900px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    grid-auto-rows: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    padding-bottom: 14px !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    height: 43px !important;
+    min-height: 43px !important;
+    margin-top: 8px !important;
+    flex: 0 0 43px !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 639px) {
+  #view-period-detail .fixed-redesign .fixed-entry-card {
+    min-height: 0 !important;
+    padding: 13px 13px 14px !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn {
+    margin-top: 8px !important;
+  }
+}
+</style>
 </html>
+
+<style id="fixed-mobile-register-real-final">
+/* GASTOS FIJOS — corrección real del formulario móvil.
+   El problema era que varias reglas anteriores seguían fijando la fila/tarjeta en 280px.
+   En móvil el formulario necesita más alto porque Monto y Descripción pasan a una columna. */
+@media (max-width: 900px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-rows: minmax(390px, auto) !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-entry-card {
+    height: 390px !important;
+    min-height: 390px !important;
+    max-height: 390px !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-entry-card .fixed-submit-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    flex: 0 0 43px !important;
+    width: 100% !important;
+    height: 43px !important;
+    min-height: 43px !important;
+    max-height: 43px !important;
+    margin-top: auto !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 639px) {
+  #view-period-detail .fixed-redesign .fixed-workspace {
+    grid-auto-rows: 390px !important;
+  }
+
+  #view-period-detail .fixed-redesign .fixed-workspace > .fixed-entry-card {
+    height: 390px !important;
+    min-height: 390px !important;
+    max-height: 390px !important;
+    padding: 13px !important;
+  }
+}
+</style>
