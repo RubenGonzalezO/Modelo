@@ -5783,4 +5783,58 @@
 }
 </style>
 
+<style id="mobile-subblocks-overflow-fix">
+/* En móvil los formularios de Ahorros y Gastos Fijos deben crecer con su contenido.
+   El alto fijo de 280px provocaba que "NUEVO MOVIMIENTO" quedara recortado/oculto. */
+@media (max-width: 900px) {
+    #view-period-detail .savings-workspace,
+    #view-period-detail .fixed-workspace {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: auto !important;
+        align-items: stretch !important;
+    }
+
+    #view-period-detail .savings-workspace > .savings-entry-card,
+    #view-period-detail .savings-workspace > .savings-ledger-card,
+    #view-period-detail .fixed-workspace > .fixed-entry-card,
+    #view-period-detail .fixed-workspace > .fixed-ledger-card {
+        height: auto !important;
+        min-height: 280px !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    #view-period-detail .savings-entry-card,
+    #view-period-detail .fixed-entry-card {
+        flex: none !important;
+    }
+
+    #view-period-detail .savings-entry-card .savings-submit-btn,
+    #view-period-detail .fixed-entry-card .fixed-submit-btn {
+        margin-top: 12px !important;
+    }
+
+    /* El historial sí conserva su propio scroll para no hacer interminable la página. */
+    #view-period-detail .savings-ledger-list,
+    #view-period-detail .fixed-ledger-list {
+        max-height: 235px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+}
+
+@media (max-width: 639px) {
+    #view-period-detail .savings-workspace,
+    #view-period-detail .fixed-workspace {
+        gap: 10px !important;
+    }
+
+    #view-period-detail .savings-entry-card,
+    #view-period-detail .fixed-entry-card {
+        min-height: 280px !important;
+        padding: 13px !important;
+    }
+}
+</style>
+
 </html>
