@@ -2560,8 +2560,8 @@
                                 </div>
                                 <div class="savings-total-chip fixed-sync-chip">
                                     <button onclick="syncPreviousBuffer()" class="fixed-sync-btn">
-                                        <i class="fa-solid fa-file-arrow-down"></i>
-                                        <span class="fixed-sync-label">Sincronizar Colchón Anterior</span>
+                                        <i class="fa-solid fa-arrows-rotate"></i>
+                                        <span class="fixed-sync-label"><span>Sincronizar</span><span>Colchón Anterior</span></span>
                                         <span id="lbl-prev-buffer" class="fixed-sync-amount">($0,00)</span>
                                     </button>
                                 </div>
@@ -2702,20 +2702,38 @@
                         </button>
                     </div>
 
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all duration-300 hover:scale-[1.01] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group pasivos-module-card pasivos-section-hero">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
-                        <div>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-400"><i class="fa-solid fa-file-invoice-dollar mr-1"></i> Control de Pasivos</span>
-                            <h2 class="text-lg font-black text-slate-100">Gestión de Compromisos y Deudas</h2>
-                        </div>
-                        <div class="bg-amber-500/15 border border-amber-500/30 px-4 py-3 rounded-xl text-right w-full sm:w-auto">
-                            <span class="text-[10px] uppercase tracking-wider text-amber-400 block font-extrabold">Deuda Total Pendiente</span>
-                            <span id="total-debts-display" class="text-xl font-black text-amber-400">$0,00</span>
+                        <div class="pasivos-section-glow"></div>
+                        <div class="nexus-module-header pasivos-unified-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon" style="color:#f59e0b;border-color:rgba(245,158,11,.28);background:linear-gradient(145deg,rgba(245,158,11,.16),rgba(245,158,11,.035));"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-amber-400"><span>CONTROL DE PASIVOS</span><span class="nexus-module-dot" style="background:#f59e0b;"></span></div>
+                                    <h3 class="nexus-module-title">Gestión de Compromisos y Deudas</h3>
+                                    <p class="nexus-module-desc">Controla y consulta el saldo pendiente de tus compromisos</p>
+                                </div>
+                            </div>
+                            <div class="nexus-module-action pasivos-total-action" style="border-color:rgba(245,158,11,.20);background:rgba(245,158,11,.045);">
+                                <span class="nexus-module-action-value text-amber-400">Total: <span id="total-debts-display">$0,00</span></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:border-amber-500 hover:shadow-lg hover:shadow-amber-500/10 group pasivos-module-card">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
-                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-4"><i class="fa-solid fa-file-invoice-dollar text-amber-400 mr-2"></i> Registrar Nuevo Compromiso</h3>
+                        <div class="nexus-module-header pasivos-unified-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon" style="color:#f59e0b;border-color:rgba(245,158,11,.28);background:linear-gradient(145deg,rgba(245,158,11,.16),rgba(245,158,11,.035));"><i class="fa-solid fa-plus"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-amber-400"><span>NUEVO COMPROMISO</span><span class="nexus-module-dot" style="background:#f59e0b;"></span></div>
+                                    <h3 class="nexus-module-title">Registrar Nuevo Compromiso</h3>
+                                    <p class="nexus-module-desc">Registra una nueva deuda o compromiso financiero</p>
+                                </div>
+                            </div>
+                            <div class="nexus-module-action pasivos-count-action" style="border-color:rgba(245,158,11,.20);background:rgba(245,158,11,.045);">
+                                <span class="nexus-module-action-value text-amber-400"><span id="debt-count-display">0</span> compromisos</span>
+                            </div>
+                        </div>
                         <form onsubmit="addDebt(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-extrabold">Concepto / Acreedor</label>
@@ -2748,24 +2766,39 @@
                         </button>
                     </div>
 
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group savings-section-hero">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
-                        <div>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400"><i class="fa-solid fa-vault mr-1"></i> Patrimonio en Cajas</span>
-                            <h2 class="text-lg font-black text-slate-100">Consolidado Histórico de Activos</h2>
-                        </div>
-                        <div class="bg-emerald-500/15 border border-emerald-500/30 px-4 py-3 rounded-xl text-right w-full sm:w-auto">
-                            <span class="text-[10px] uppercase tracking-wider text-emerald-400 block font-extrabold">Total en Cajas</span>
-                            <span id="total-global-savings-display" class="text-xl font-black text-emerald-400">$0,00</span>
+                        <div class="savings-section-glow"></div>
+                        <div class="nexus-module-header savings-section-unified-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-vault"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-emerald-400"><span>PATRIMONIO EN CAJAS</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                    <h3 class="nexus-module-title">Consolidado Histórico de Activos</h3>
+                                    <p class="nexus-module-desc">Consolida y consulta el patrimonio acumulado en tus cajas</p>
+                                </div>
+                            </div>
+                            <div class="nexus-module-action savings-section-total-action" style="border-color:rgba(16,185,129,.20);background:rgba(16,185,129,.045);">
+                                <span class="nexus-module-action-value text-emerald-400">Total: <span id="total-global-savings-display">$0,00</span></span>
+                            </div>
                         </div>
                     </div>
                     <div id="savings-boxes-grid" class="savings-boxes-grid"></div>
                     <div class="flex justify-end">
                         <button id="btn-add-savings-box-main" onclick="addSavingsBox()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all"><i class="fa-solid fa-plus mr-1"></i> Crear Caja</button>
                     </div>
-                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden">
+                    <div class="bg-nexus-800 border border-nexus-700/80 p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 group relative overflow-hidden savings-period-breakdown-card">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
-                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 mb-4">Desglose por Periodo</h3>
+                        <div class="nexus-module-header savings-breakdown-header">
+                            <div class="nexus-module-header-main">
+                                <div class="nexus-module-icon savings-breakdown-icon" style="color:#10b981;border-color:rgba(16,185,129,.28);background:linear-gradient(145deg,rgba(16,185,129,.16),rgba(16,185,129,.035));"><i class="fa-solid fa-chart-column"></i></div>
+                                <div class="nexus-module-copy">
+                                    <div class="nexus-module-eyebrow text-emerald-400"><span>HISTÓRICO</span><span class="nexus-module-dot" style="background:#10b981;"></span></div>
+                                    <h3 class="nexus-module-title">Desglose por Periodo</h3>
+                                    <p class="nexus-module-desc">Consulta la evolución de cada caja y el total acumulado por periodo</p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs text-slate-300">
                                 <thead class="bg-nexus-900 text-[10px] uppercase text-slate-400 tracking-wider">
@@ -2946,6 +2979,10 @@
             userName: "Usuario",
             boxNames: { box1: "Caja Principal", box2: "Caja Reserva", box3: "Caja Inversión", box4: "Caja Metas" },
             activeBoxes: ["box1", "box2", "box3"],
+            // Punto de reinicio de cada caja. No borra el historial mensual;
+            // solamente define desde qué saldo se considera el nuevo ciclo de la caja.
+            boxResetBalances: {},
+            boxResetHistory: {},
             categories: {
                 income: [
                     { name: "Salario", icon: "fa-solid fa-briefcase" },
@@ -2971,6 +3008,13 @@
         }
         if (db.categories && db.categories.expense && typeof db.categories.expense[0] === 'string') {
             db.categories.expense = db.categories.expense.map(c => ({ name: c, icon: "fa-solid fa-tag" }));
+        }
+
+        if (!db.boxResetBalances || typeof db.boxResetBalances !== 'object' || Array.isArray(db.boxResetBalances)) {
+            db.boxResetBalances = {};
+        }
+        if (!db.boxResetHistory || typeof db.boxResetHistory !== 'object' || Array.isArray(db.boxResetHistory)) {
+            db.boxResetHistory = {};
         }
 
         if (!Array.isArray(db.activeBoxes)) {
@@ -2999,6 +3043,8 @@
         let chartInstance = null;
         let balanceChartInstance = null;
         let pendingDeleteCallback = null;
+        let activeUndoTimer = null;
+        let activeUndoToast = null;
         let dashboardScope = localStorage.getItem('nexus_dashboard_scope') || 'global';
         let dashboardYear = localStorage.getItem('nexus_dashboard_year') || String(new Date().getFullYear());
         let themeMode = localStorage.getItem('nexus_theme') || 'dark';
@@ -3044,6 +3090,70 @@
             );
         }
 
+        function getRawBoxBalance(boxKey) {
+            let total = 0;
+            Object.keys(db.periods || {}).forEach(periodKey => {
+                const p = db.periods[periodKey] || {};
+                (p.savingsRecords || []).forEach(r => {
+                    if (r.box === boxKey) total += Number(r.amount) || 0;
+                });
+                (p.transactions || []).forEach(t => {
+                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado' && (!resetAt || Number(t.id || 0) > resetAt)) {
+                        total -= Number(t.amount) || 0;
+                    }
+                });
+            });
+            return total;
+        }
+
+        function getBoxCurrentBalance(boxKey) {
+            const raw = getRawBoxBalance(boxKey);
+            const resetBase = Number(db.boxResetBalances?.[boxKey] || 0);
+            return raw - resetBase;
+        }
+
+        function resetSavingsBox(boxKey, silent = false) {
+            const active = getActiveBoxKeys();
+            if (!active.includes(boxKey)) return false;
+
+            const current = getBoxCurrentBalance(boxKey);
+            // Reiniciar solo está permitido cuando la caja está completamente en cero.
+            if (Math.abs(current) > 0.005) {
+                showNexusAlert(`No se puede reiniciar ${db.boxNames[boxKey] || 'la caja'} porque tiene dinero. Saldo actual: ${formatCurrency(current)}. Lleva el saldo a $0,00 para poder reiniciarla.`, 'warning');
+                return false;
+            }
+
+            triggerDeleteConfirmation(
+                `¿Estás seguro de reiniciar ${db.boxNames[boxKey] || 'esta caja'}? Se limpiará únicamente el historial visible de esta tarjeta. Los registros de los meses y del Dashboard NO se eliminarán.`,
+                () => {
+                    const executionBalance = getBoxCurrentBalance(boxKey);
+                    if (Math.abs(executionBalance) > 0.005) {
+                        showNexusAlert(`La acción fue bloqueada porque ${db.boxNames[boxKey] || 'la caja'} ya no está en $0,00. Saldo actual: ${formatCurrency(executionBalance)}.`, 'warning');
+                        return;
+                    }
+
+                    const snapshot = JSON.parse(JSON.stringify(db));
+                    db.boxResetHistory[boxKey] = Date.now();
+                    // No se borran ni modifican registros mensuales. La marca solo
+                    // determina qué registros pertenecen al nuevo ciclo de la tarjeta.
+                    db.boxResetBalances[boxKey] = getRawBoxBalance(boxKey);
+                    saveDB();
+                    renderSavingsView();
+                    initAjustes();
+                    showUndoAlert(
+                        `${db.boxNames[boxKey] || 'La caja'} fue reiniciada. Sus registros anteriores ya no aparecen en la tarjeta, pero siguen intactos en meses y Dashboard.`,
+                        () => {
+                            db = snapshot;
+                            saveDB();
+                            renderSavingsView();
+                            initAjustes();
+                        }
+                    );
+                }
+            );
+            return true;
+        }
+
         function addSavingsBox() {
             const active = getActiveBoxKeys();
             if (active.length >= 4) {
@@ -3053,10 +3163,94 @@
             const next = ['box1','box2','box3','box4'].find(k => !active.includes(k));
             db.activeBoxes.push(next);
             if (!db.boxNames[next]) db.boxNames[next] = `Caja ${db.activeBoxes.length}`;
+            // Si la clave fue usada anteriormente, la nueva caja comienza desde cero
+            // sin borrar los registros históricos asociados a esa clave.
+            db.boxResetBalances[next] = getRawBoxBalance(next);
             saveDB();
             renderSavingsView();
             initAjustes();
             showNexusAlert('Nueva caja de ahorros creada correctamente.', 'success');
+        }
+
+        /*
+         * Al eliminar una caja, los movimientos de esa caja no pueden provocar
+         * dinero negativo ni desaparecer del balance mensual.
+         *
+         * Regla de seguridad: la UI solo permite eliminar con saldo 0.
+         * Respaldo: si por datos antiguos/corruptos la eliminación llega a
+         * ejecutarse con saldo distinto de cero, se revierte la caja por periodo:
+         * - Los retiros se compensan contra los aportes MÁS ANTIGUOS primero.
+         * - Se reducen/eliminan los aportes originales en sus respectivos meses.
+         * - Los retiros de la caja se eliminan.
+         * De esta forma el dinero vuelve al mes donde originalmente se aportó.
+         * Ejemplo: Jun +200, Jul +250, Ago -50 => Jun +150, Jul +250.
+         */
+        function reconcileDeletedSavingsBox(boxKey) {
+            const deposits = [];
+            const withdrawals = [];
+
+            Object.keys(db.periods || {}).sort().forEach(ym => {
+                const p = db.periods[ym];
+                if (!p) return;
+
+                (p.savingsRecords || []).forEach(r => {
+                    if (r.box === boxKey && Number(r.amount) > 0) {
+                        deposits.push({ ym, record: r, remaining: Number(r.amount) || 0 });
+                    }
+                });
+
+                (p.transactions || []).forEach(t => {
+                    if (t.type === 'savings' && t.category === boxKey && (t.status || 'Realizado') === 'Realizado') {
+                        withdrawals.push({ ym, transaction: t, amount: Number(t.amount) || 0 });
+                    }
+                });
+            });
+
+            // Un retiro reduce primero los aportes más antiguos (FIFO).
+            withdrawals.sort((a, b) => a.ym.localeCompare(b.ym) || Number(a.transaction.id || 0) - Number(b.transaction.id || 0));
+            let depositIndex = 0;
+
+            withdrawals.forEach(w => {
+                let pending = Math.max(0, w.amount);
+                while (pending > 0.000001 && depositIndex < deposits.length) {
+                    const d = deposits[depositIndex];
+                    const applied = Math.min(d.remaining, pending);
+                    d.remaining -= applied;
+                    pending -= applied;
+                    if (d.remaining <= 0.000001) depositIndex++;
+                }
+            });
+
+            // Reescribe cada aporte con su saldo neto restante y elimina los retiros.
+            Object.keys(db.periods || {}).forEach(ym => {
+                const p = db.periods[ym];
+                if (!p) return;
+
+                const depositById = new Map(
+                    deposits.filter(d => d.ym === ym).map(d => [d.record.id, d.remaining])
+                );
+
+                if (p.savingsRecords) {
+                    p.savingsRecords = p.savingsRecords.flatMap(r => {
+                        if (r.box !== boxKey) return [r];
+                        const remaining = depositById.get(r.id);
+                        if (remaining === undefined || remaining <= 0.000001) return [];
+                        return [{ ...r, amount: remaining }];
+                    });
+                }
+
+                if (p.transactions) {
+                    p.transactions = p.transactions.filter(t => !(
+                        t.type === 'savings' &&
+                        t.category === boxKey
+                    ));
+                }
+            });
+
+            return {
+                deposits: deposits.length,
+                withdrawals: withdrawals.length
+            };
         }
 
         function removeSavingsBox(boxKey) {
@@ -3065,17 +3259,43 @@
                 showNexusAlert('Debes conservar al menos una caja de ahorros.', 'warning');
                 return;
             }
-            if (boxHasHistory(boxKey)) {
-                showNexusAlert('No puedes eliminar una caja que ya tiene movimientos registrados. Puedes cambiar su nombre.', 'warning');
+
+            const currentBalance = getBoxCurrentBalance(boxKey);
+            // La única condición para eliminar una caja es saldo exactamente cero.
+            if (Math.abs(currentBalance) > 0.005) {
+                showNexusAlert(`No se puede eliminar ${db.boxNames[boxKey] || 'la caja'} porque tiene dinero. Saldo actual: ${formatCurrency(currentBalance)}. Lleva el saldo a $0,00 para poder eliminarla.`, 'warning');
                 return;
             }
-            triggerDeleteConfirmation(`¿Estás seguro de eliminar ${db.boxNames[boxKey] || boxKey}?`, () => {
-                db.activeBoxes = getActiveBoxKeys().filter(k => k !== boxKey);
-                saveDB();
-                renderSavingsView();
-                initAjustes();
-                showNexusAlert('Caja de ahorros eliminada.', 'update');
-            });
+
+            triggerDeleteConfirmation(
+                `¿Estás seguro de eliminar ${db.boxNames[boxKey] || boxKey}? La caja se retirará de las cajas activas. Sus registros históricos de meses y Dashboard permanecerán intactos.`,
+                () => {
+                    // Segunda comprobación justo antes de ejecutar: si apareció saldo,
+                    // la acción se cancela; jamás se elimina dinero silenciosamente.
+                    const balanceAtExecution = getBoxCurrentBalance(boxKey);
+                    if (Math.abs(balanceAtExecution) > 0.005) {
+                        showNexusAlert(`No se puede eliminar ${db.boxNames[boxKey] || 'la caja'} porque ahora tiene saldo: ${formatCurrency(balanceAtExecution)}.`, 'warning');
+                        return;
+                    }
+
+                    const snapshot = JSON.parse(JSON.stringify(db));
+                    db.activeBoxes = getActiveBoxKeys().filter(k => k !== boxKey);
+                    delete db.boxResetBalances[boxKey];
+                    delete db.boxResetHistory[boxKey];
+                    saveDB();
+                    renderSavingsView();
+                    initAjustes();
+                    showUndoAlert(
+                        `${boxKey} fue eliminada. Los registros de los meses y del Dashboard permanecen intactos.`,
+                        () => {
+                            db = snapshot;
+                            saveDB();
+                            renderSavingsView();
+                            initAjustes();
+                        }
+                    );
+                }
+            );
         }
 
         function renderBoxConfiguration() {
@@ -3087,7 +3307,8 @@
                         <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-extrabold">Caja ${idx + 1}</label>
                         <input type="text" id="cfg-${key}" value="${(db.boxNames[key] || `Caja ${idx + 1}`).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" class="w-full bg-nexus-800 border border-nexus-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
                     </div>
-                    <button onclick="removeSavingsBox('${key}')" class="${getActiveBoxCount() <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-2.5 rounded-lg border border-nexus-700" title="Eliminar caja"><i class="fa-solid fa-trash text-xs"></i></button>
+                    <button onclick="resetSavingsBox('${key}')" class="text-slate-500 hover:text-amber-400 p-2.5 rounded-lg border border-nexus-700" title="Reiniciar caja"><i class="fa-solid fa-rotate-right text-xs"></i></button>
+                    <button onclick="removeSavingsBox('${key}')" class="${getActiveBoxCount() <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-2.5 rounded-lg border border-nexus-700" title="Eliminar caja (solo con saldo $0,00)"><i class="fa-solid fa-trash text-xs"></i></button>
                 </div>`).join('');
             const addBtn = document.getElementById('btn-add-savings-box-settings');
             if (addBtn) {
@@ -3182,6 +3403,52 @@
             }, 4000);
         }
 
+        function showUndoAlert(message, undoCallback) {
+            const container = document.getElementById('nexus-toast-container');
+            if (!container) return;
+
+            if (activeUndoTimer) clearInterval(activeUndoTimer);
+            if (activeUndoToast) activeUndoToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl border text-xs font-bold transition-all transform translate-y-4 opacity-0 duration-300 max-w-md backdrop-blur-md bg-emerald-950/95 border-emerald-500/40 text-emerald-100';
+            let remaining = 10;
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
+                <span class="flex-1 leading-snug">${message}</span>
+                <button type="button" class="shrink-0 px-2.5 py-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 uppercase tracking-wider text-[10px] font-black">Deshacer <span class="undo-count">10</span>s</button>
+            `;
+            const undoBtn = toast.querySelector('button');
+            const countEl = toast.querySelector('.undo-count');
+            let undone = false;
+
+            const finish = () => {
+                if (activeUndoTimer) clearInterval(activeUndoTimer);
+                activeUndoTimer = null;
+                if (activeUndoToast === toast) activeUndoToast = null;
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            };
+
+            undoBtn.addEventListener('click', () => {
+                if (undone) return;
+                undone = true;
+                undoCallback();
+                showNexusAlert('Acción deshecha correctamente.', 'update');
+                finish();
+            });
+
+            container.appendChild(toast);
+            activeUndoToast = toast;
+            setTimeout(() => toast.classList.remove('translate-y-4', 'opacity-0'), 10);
+
+            activeUndoTimer = setInterval(() => {
+                remaining--;
+                if (countEl) countEl.innerText = remaining;
+                if (remaining <= 0) finish();
+            }, 1000);
+        }
+
         function triggerDeleteConfirmation(message, callback) {
             document.getElementById('delete-confirm-text').innerText = message;
             pendingDeleteCallback = callback;
@@ -3195,9 +3462,11 @@
 
         document.getElementById('btn-confirm-delete-action').addEventListener('click', () => {
             if (pendingDeleteCallback) {
-                pendingDeleteCallback();
+                const callback = pendingDeleteCallback;
+                pendingDeleteCallback = null;
+                document.getElementById('delete-confirm-modal').classList.add('hidden');
+                callback();
             }
-            closeDeleteConfirmModal();
         });
 
         function updateUserNameDisplay() {
@@ -3793,6 +4062,7 @@
         function openSavingsBoxModal(boxRef) {
             const boxKey = String(boxRef).startsWith('box') ? String(boxRef) : `box${boxRef}`;
             const boxName = db.boxNames[boxKey] || boxKey;
+            const resetAt = Number(db.boxResetHistory?.[boxKey] || 0);
             const modal = document.getElementById('dashboard-modal');
             const titleEl = document.getElementById('dashboard-modal-title');
             const contentEl = document.getElementById('dashboard-modal-content');
@@ -3807,7 +4077,7 @@
                 const p = db.periods[ym];
                 const records = p.savingsRecords || [];
                 records.forEach(r => {
-                    if (r.box === boxKey) {
+                    if (r.box === boxKey && (!resetAt || Number(r.id || 0) > resetAt)) {
                         listHtml += `
                             <div class="bg-nexus-900 p-3 rounded-xl border border-nexus-700 flex justify-between items-center text-xs">
                                 <div>
@@ -4094,7 +4364,7 @@
                 const totSav = Object.values(boxTotals).reduce((sum, value) => sum + Number(value || 0), 0);
 
                 grid.innerHTML += `
-                    <div onclick="openPeriodDetail('${ym}')" class="bg-nexus-800 border border-nexus-700/80 p-7 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 space-y-4 relative overflow-hidden group min-h-[180px] flex flex-col justify-between cursor-pointer">
+                    <div onclick="openPeriodDetail('${ym}')" class="bg-nexus-800 border border-nexus-700/80 p-5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 space-y-3 relative overflow-hidden group min-h-[160px] flex flex-col justify-between cursor-pointer">
                         <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-emerald-500 group-hover:bg-emerald-400 transition-all"></div>
                         <div class="flex justify-between items-center">
                             <h3 class="font-black text-slate-100 text-sm uppercase tracking-wider hover:text-emerald-400 transition-colors">${formatMonthName(ym)}</h3>
@@ -4103,18 +4373,18 @@
                                 <button onclick="event.stopPropagation(); deletePeriod('${ym}')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors" title="Eliminar periodo"><i class="fa-solid fa-trash text-xs"></i></button>
                             </div>
                         </div>
-                        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-nexus-700 text-center">
-                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden">
+                        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-nexus-700 text-center min-w-0">
+                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden min-w-0">
                                 <span class="text-[9px] uppercase text-slate-400 block font-extrabold">Ingresos</span>
-                                <span class="text-xs font-bold text-teal-400">${formatCurrency(inc)}</span>
+                                <span class="period-kpi-value text-teal-400">${formatCurrency(inc)}</span>
                             </div>
-                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden">
+                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden min-w-0">
                                 <span class="text-[9px] uppercase text-slate-400 block font-extrabold">Gastos</span>
-                                <span class="text-xs font-bold text-rose-400">${formatCurrency(exp)}</span>
+                                <span class="period-kpi-value text-rose-400">${formatCurrency(exp)}</span>
                             </div>
-                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden">
+                            <div class="bg-nexus-900 p-2.5 rounded-xl border border-nexus-700/60 relative overflow-hidden min-w-0">
                                 <span class="text-[9px] uppercase text-slate-400 block font-extrabold">Ahorros</span>
-                                <span class="text-xs font-bold text-emerald-400">${formatCurrency(totSav)}</span>
+                                <span class="period-kpi-value text-emerald-400">${formatCurrency(totSav)}</span>
                             </div>
                         </div>
                     </div>
@@ -4180,6 +4450,21 @@
             activeAppView = 'period-detail';
             localStorage.setItem('nexus_active_view', 'period-detail');
             localStorage.setItem('nexus_active_period', ym);
+
+            // Un periodo pertenece visualmente a la sección "Periodos Mensuales".
+            // Al abrir/restaurar un periodo, mantenemos esa sección activa y evitamos
+            // que el encabezado vuelva por defecto a "Vista General de Finanzas".
+            document.querySelectorAll('.sidebar-btn').forEach(el => {
+                el.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/20');
+                el.classList.add('text-slate-400', 'hover:bg-nexus-700/50', 'hover:text-slate-200');
+            });
+            const periodosBtn = document.getElementById('tab-periodos');
+            if (periodosBtn) {
+                periodosBtn.classList.remove('text-slate-400', 'hover:bg-nexus-700/50', 'hover:text-slate-200');
+                periodosBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/20');
+            }
+            const headerTitle = document.getElementById('header-title');
+            if (headerTitle) headerTitle.innerText = 'Periodos Mensuales';
             const [y, m] = ym.split('-');
             const monthsLower = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
             const monthNameLower = monthsLower[Number(m) - 1];
@@ -4390,18 +4675,9 @@
         }
 
         function getTotalBoxCurrent(ym, boxKey) {
-            let totalBoxHist = 0;
-            Object.keys(db.periods).forEach(periodKey => {
-                (db.periods[periodKey].savingsRecords || []).forEach(r => {
-                    if (r.box === boxKey) totalBoxHist += Number(r.amount);
-                });
-                (db.periods[periodKey].transactions || []).forEach(t => {
-                    if (t.type === 'savings' && t.category === boxKey && (t.status||'Realizado') === 'Realizado') {
-                        totalBoxHist -= Number(t.amount);
-                    }
-                });
-            });
-            return totalBoxHist;
+            // El saldo actual de la caja respeta su último reinicio.
+            // Los movimientos históricos por periodo permanecen intactos.
+            return getBoxCurrentBalance(boxKey);
         }
 
         function addTransaction(e) {
@@ -4910,6 +5186,8 @@
             let totalDebts = 0;
             db.debts.forEach(d => totalDebts += Number(d.amount));
             document.getElementById('total-debts-display').innerText = formatCurrency(totalDebts);
+            const debtCountDisplay = document.getElementById('debt-count-display');
+            if (debtCountDisplay) debtCountDisplay.innerText = db.debts.length;
 
             const grid = document.getElementById('debts-cards-grid');
             grid.innerHTML = '';
@@ -4956,7 +5234,7 @@
                     const color = colors[idx] || 'emerald';
                     return `<div onclick="openSavingsBoxModal('${key}')" class="savings-box-card bg-nexus-800 border border-${color}-500/30 p-5 rounded-2xl shadow-sm space-y-3 relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-${color}-500 hover:shadow-lg group cursor-pointer">
                         <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-${color}-500"></div>
-                        <div class="flex items-center justify-between"><span class="text-[10px] uppercase tracking-wider text-${color}-400 font-extrabold">Caja ${idx+1}</span><div class="flex items-center gap-2"><i class="fa-solid fa-vault text-${color}-400"></i><button onclick="event.stopPropagation(); removeSavingsBox('${key}')" class="${active.length <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-1" title="Eliminar caja"><i class="fa-solid fa-trash text-[10px]"></i></button></div></div>
+                        <div class="flex items-center justify-between"><span class="text-[10px] uppercase tracking-wider text-${color}-400 font-extrabold">Caja ${idx+1}</span><div class="flex items-center gap-2"><i class="fa-solid fa-vault text-${color}-400"></i><button onclick="event.stopPropagation(); resetSavingsBox('${key}')" class="text-slate-500 hover:text-amber-400 p-1" title="Reiniciar caja"><i class="fa-solid fa-rotate-right text-[10px]"></i></button><button onclick="event.stopPropagation(); removeSavingsBox('${key}')" class="${active.length <= 1 ? 'hidden' : ''} text-slate-500 hover:text-rose-400 p-1" title="Eliminar caja (solo con saldo $0,00)"><i class="fa-solid fa-trash text-[10px]"></i></button></div></div>
                         <h3 class="text-xl font-black text-${color}-400">${formatCurrency(totalsGlobal[key])}</h3>
                         <span class="text-[10px] text-slate-400">${db.boxNames[key] || key} · Ver movimientos <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </div>`;
@@ -5000,13 +5278,30 @@
         }
 
         function saveBoxNames() {
+            let renamed = 0;
             getActiveBoxKeys().forEach(key => {
                 const input = document.getElementById(`cfg-${key}`);
-                if (input) db.boxNames[key] = input.value.trim() || key.replace('box','Caja ');
+                if (!input) return;
+                const oldName = (db.boxNames[key] || '').trim();
+                const newName = input.value.trim() || key.replace('box','Caja ');
+                if (newName !== oldName) {
+                    const currentBalance = getBoxCurrentBalance(key);
+                    if (Math.abs(currentBalance) > 0.005) {
+                        showNexusAlert(`No se puede cambiar el nombre de ${oldName} mientras tenga saldo. Saldo actual: ${formatCurrency(currentBalance)}.`, 'warning');
+                        return;
+                    }
+                    db.boxNames[key] = newName;
+                    // Cambiar nombre implica comenzar un nuevo ciclo, pero sin tocar
+                    // ningún movimiento histórico. El saldo ya debe estar en cero.
+                    db.boxResetHistory[key] = Date.now();
+                    db.boxResetBalances[key] = getRawBoxBalance(key);
+                    renamed++;
+                }
             });
             saveDB();
             renderSavingsView();
-            showNexusAlert('¡Nombres de cajas actualizados correctamente!', 'success');
+            renderBoxConfiguration();
+            showNexusAlert(renamed ? `Nombres actualizados y ${renamed} caja(s) reiniciada(s). El historial mensual se conserva.` : '¡Nombres de cajas actualizados correctamente!', 'success');
         }
 
         function renderIconPicker(type) {
@@ -5277,6 +5572,316 @@
     #view-period-detail .fixed-redesign .fixed-workspace { padding: 0 !important; gap: 10px !important; }
 }
 </style>
+
+<style id="single-field-effect-final">
+/* Un solo contorno visual: sin ring, outline ni sombra duplicada. */
+#view-period-detail input,
+#view-period-detail select,
+#view-period-detail textarea,
+#view-period-detail .savings-field,
+#view-period-detail .savings-money-field,
+#view-period-detail .savings-money-field input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#view-period-detail input:focus,
+#view-period-detail input:focus-visible,
+#view-period-detail select:focus,
+#view-period-detail select:focus-visible,
+#view-period-detail textarea:focus,
+#view-period-detail textarea:focus-visible,
+#view-period-detail .savings-field:focus,
+#view-period-detail .savings-field:focus-visible,
+#view-period-detail .savings-money-field:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* El foco se expresa únicamente mediante el cambio de color del borde. */
+#view-period-detail .savings-redesign .savings-field:focus,
+#view-period-detail .savings-redesign .savings-money-field:focus-within {
+    border-color: rgba(52,211,153,.78) !important;
+}
+#view-period-detail .fixed-redesign .savings-field:focus,
+#view-period-detail .fixed-redesign .savings-money-field:focus-within {
+    border-color: rgba(45,212,191,.78) !important;
+}
+
+/* Evita que el outline global de accesibilidad vuelva a crear un segundo marco. */
+#view-period-detail input:focus-visible,
+#view-period-detail select:focus-visible,
+#view-period-detail textarea:focus-visible {
+    outline: none !important;
+    outline-offset: 0 !important;
+}
+
+<style id="period-cards-final-fit">
+    /* Period cards: compact top rhythm + values constrained to their KPI cells */
+    #periods-grid > div {
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+    #periods-grid > div > .flex {
+        min-width: 0 !important;
+    }
+    #periods-grid > div > .flex h3 {
+        min-width: 0 !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+    #periods-grid > div .grid > div {
+        min-width: 0 !important;
+    }
+    #periods-grid .period-kpi-value {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        font-size: clamp(9px, 1vw, 12px) !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.02em !important;
+        font-weight: 800 !important;
+    }
+    @media (max-width: 640px) {
+        #periods-grid > div {
+            padding: 1rem !important;
+            min-height: 148px !important;
+        }
+        #periods-grid > div .grid {
+            gap: .35rem !important;
+        }
+        #periods-grid > div .grid > div {
+            padding: .55rem .4rem !important;
+        }
+        #periods-grid .period-kpi-value {
+            font-size: 10px !important;
+        }
+    }
+</style>
+</style>
+
+<style id="pasivos-header-and-cards-final">
+/* DEUDAS & PASIVOS — mismo encabezado maestro que Detalle de Ingresos/Gastos/Ahorros */
+#view-pasivos .pasivos-module-card {
+    padding: 18px 20px !important;
+    background: var(--module-bg, linear-gradient(145deg,rgba(13,20,32,.985),rgba(7,12,20,.985))) !important;
+    border-color: var(--module-line, rgba(67,89,116,.62)) !important;
+}
+#view-pasivos .pasivos-unified-header {
+    margin: 0 !important;
+    padding-bottom: 13px !important;
+    border-bottom: 1px solid var(--nw-line-soft, rgba(67,89,116,.40));
+}
+#view-pasivos .pasivos-module-card .nexus-module-icon {
+    flex: 0 0 auto !important;
+}
+#view-pasivos .pasivos-module-card .nexus-module-desc {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+}
+#view-pasivos .pasivos-total-action,
+#view-pasivos .pasivos-count-action {
+    min-width: 150px !important;
+    padding: 10px 14px !important;
+    border-radius: 11px !important;
+    text-align: center !important;
+}
+#view-pasivos .pasivos-total-action .nexus-module-action-value,
+#view-pasivos .pasivos-count-action .nexus-module-action-value {
+    white-space: nowrap !important;
+}
+
+/* Encabezado principal de la sección Deudas y Pasivos: jerarquía diferencial. */
+#view-pasivos .pasivos-section-hero {
+    padding: 20px 22px !important;
+    border-color: rgba(245,158,11,.28) !important;
+    background:
+        radial-gradient(520px 220px at 100% 0%, rgba(245,158,11,.075), transparent 68%),
+        linear-gradient(145deg, rgba(17,25,38,.99), rgba(8,13,21,.99)) !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.018) !important;
+}
+#view-pasivos .pasivos-section-hero .pasivos-section-glow {
+    display: none !important;
+}
+#view-pasivos .pasivos-section-hero .pasivos-unified-header {
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+    align-items: center !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-icon {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 16px !important;
+    font-size: 20px !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-title {
+    font-size: 24px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.035em !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-eyebrow {
+    font-size: 11px !important;
+    letter-spacing: .16em !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-desc {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    margin-top: 5px !important;
+}
+#view-pasivos .pasivos-section-hero .pasivos-total-action {
+    min-width: 170px !important;
+    padding: 11px 15px !important;
+    align-self: center !important;
+}
+
+/* Formulario más compacto y alineado con el sistema de inputs de los demás módulos. */
+#view-pasivos .pasivos-module-card form {
+    margin-top: 13px !important;
+    gap: 10px !important;
+    align-items: end !important;
+}
+#view-pasivos .pasivos-module-card form > div {
+    min-width: 0 !important;
+}
+#view-pasivos .pasivos-module-card form input {
+    min-height: 43px !important;
+    padding: 0 12px !important;
+}
+#view-pasivos .pasivos-module-card form button {
+    min-height: 43px !important;
+}
+
+/* Tarjetas de préstamos/deudas: menos aire y cifras contenidas dentro de su columna. */
+#view-pasivos #debts-cards-grid {
+    gap: 12px !important;
+}
+#view-pasivos #debts-cards-grid > div {
+    min-width: 0 !important;
+    min-height: 132px !important;
+    padding: 14px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+}
+#view-pasivos #debts-cards-grid > div > div:first-of-type {
+    min-width: 0 !important;
+}
+#view-pasivos #debts-cards-grid h3 {
+    min-width: 0 !important;
+    max-width: calc(100% - 26px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 13px !important;
+}
+#view-pasivos #debts-cards-grid span.text-xl {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 18px !important;
+    line-height: 1.15 !important;
+}
+#view-pasivos #debts-cards-grid span.text-\[10px\] {
+    font-size: 9px !important;
+}
+
+@media (max-width: 639px) {
+    #view-pasivos .pasivos-module-card { padding: 15px !important; }
+    #view-pasivos .pasivos-section-hero { padding: 17px 15px !important; }
+    #view-pasivos .pasivos-section-hero .pasivos-section-glow { left: 15px !important; right: 15px !important; }
+    #view-pasivos .pasivos-section-hero .nexus-module-title { font-size: 22px !important; }
+    #view-pasivos .pasivos-section-hero .nexus-module-icon { width: 50px !important; height: 50px !important; font-size: 18px !important; }
+    #view-pasivos .pasivos-unified-header { padding-bottom: 11px !important; }
+    #view-pasivos .pasivos-module-card .nexus-module-desc { font-size: 12px !important; }
+    #view-pasivos .pasivos-total-action,
+    #view-pasivos .pasivos-count-action { width: 100% !important; min-width: 0 !important; }
+    #view-pasivos #debts-cards-grid > div { min-height: 124px !important; padding: 13px !important; }
+}
+</style>
+
+<style id="unified-icon-box-geometry-final">
+/* ICONOS — geometría unificada: cada contenedor es perfectamente cuadrado
+   y todos usan la misma curvatura de interfaz. Se preservan los tamaños
+   jerárquicos (módulos normales vs. encabezado principal). */
+#app-scroll .section-icon-box {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 44px !important;
+    border-radius: 14px !important;
+}
+
+#app-scroll .nexus-module-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 44px !important;
+    border-radius: 14px !important;
+}
+
+/* El encabezado principal de Pasivos conserva su jerarquía mayor, pero
+   mantiene exactamente la misma proporción cuadrada y curvatura. */
+#app-scroll .pasivos-section-hero .nexus-module-icon {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    flex-basis: 56px !important;
+    border-radius: 14px !important;
+}
+
+@media (max-width: 639px) {
+    #app-scroll .pasivos-section-hero .nexus-module-icon {
+        width: 50px !important;
+        height: 50px !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
+        max-width: 50px !important;
+        max-height: 50px !important;
+        flex-basis: 50px !important;
+        border-radius: 14px !important;
+    }
+}
+
+/* Cualquier icono de módulo que tenga caja de fondo conserva centro
+   geométrico aunque el contenido interno cambie de tamaño. */
+#app-scroll .nexus-module-icon > i,
+#app-scroll .section-icon-box > i {
+    display: block !important;
+    line-height: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
+}
+</style>
+
 </body>
 
 <style id="fixed-copy-savings-exact-final">
@@ -5929,6 +6534,53 @@
   }
 }
 </style>
+<style id="final-sync-and-movement-alignment">
+/* Ajuste final solicitado: sincronización más legible y registro alineado con los campos. */
+#view-period-detail .fixed-redesign .fixed-sync-btn {
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn > i {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-label {
+    width: 128px !important;
+    max-width: 128px !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.15 !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-amount {
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* El quinto bloque de Movimientos ocupa exactamente el alto del control a su izquierda. */
+#view-period-detail form[onsubmit="addTransaction(event)"] > div.flex.items-end {
+    height: 42px !important;
+    min-height: 42px !important;
+    align-self: end !important;
+    display: flex !important;
+    align-items: flex-end !important;
+}
+#view-period-detail form[onsubmit="addTransaction(event)"] .movement-register-btn {
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    align-self: flex-end !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+}
+</style>
 </html>
 
 <style id="fixed-mobile-register-real-final">
@@ -6069,5 +6721,435 @@
     max-height: 280px !important;
     padding: 13px !important;
   }
+}
+</style>
+
+<style id="unified-colored-fields-clean-final">
+/* CONTROLES — un solo efecto visual por casilla.
+   Se elimina el anillo exterior + sombra doble. La casilla usa una sola línea
+   de borde y, al enfocar, únicamente cambia la intensidad de ese mismo borde. */
+#view-period-detail input,
+#view-period-detail select,
+#view-period-detail textarea {
+    transition: border-color .22s ease, box-shadow .22s ease, background-color .22s ease !important;
+}
+
+/* Base: una sola línea de borde, sin anillos ni sombras exteriores. */
+#view-period-detail .savings-redesign .savings-field,
+#view-period-detail .savings-redesign .savings-money-field,
+#view-period-detail .fixed-redesign .savings-field,
+#view-period-detail .fixed-redesign .savings-money-field,
+#view-period-detail #tx-type,
+#view-period-detail #tx-category,
+#view-period-detail #tx-amount,
+#view-period-detail #tx-desc,
+#view-period-detail #debt-name,
+#view-period-detail #debt-amount,
+#view-period-detail #new-inc-cat,
+#view-period-detail #new-inc-icon,
+#view-period-detail #new-exp-cat,
+#view-period-detail #new-exp-icon,
+#view-period-detail #new-period-month,
+#view-period-detail #new-period-year,
+#view-period-detail #quick-calendar-select,
+#view-period-detail #cfg-user-name {
+    box-shadow: none !important;
+}
+
+/* Ahorros — verde esmeralda */
+#view-period-detail .savings-redesign .savings-field,
+#view-period-detail .savings-redesign .savings-money-field {
+    border: 1px solid rgba(52,211,153,.30) !important;
+}
+#view-period-detail .savings-redesign .savings-field:focus,
+#view-period-detail .savings-redesign .savings-money-field:focus-within {
+    border-color: rgba(52,211,153,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Gastos Fijos — turquesa */
+#view-period-detail .fixed-redesign .savings-field,
+#view-period-detail .fixed-redesign .savings-money-field {
+    border: 1px solid rgba(45,212,191,.30) !important;
+}
+#view-period-detail .fixed-redesign .savings-field:focus,
+#view-period-detail .fixed-redesign .savings-money-field:focus-within {
+    border-color: rgba(45,212,191,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Movimientos — verde */
+#view-period-detail #tx-type,
+#view-period-detail #tx-category,
+#view-period-detail #tx-amount,
+#view-period-detail #tx-desc {
+    border: 1px solid rgba(52,211,153,.30) !important;
+}
+#view-period-detail #tx-type:focus,
+#view-period-detail #tx-category:focus,
+#view-period-detail #tx-amount:focus,
+#view-period-detail #tx-desc:focus {
+    border-color: rgba(52,211,153,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Deudas — ámbar */
+#view-period-detail #debt-name,
+#view-period-detail #debt-amount {
+    border: 1px solid rgba(245,158,11,.30) !important;
+}
+#view-period-detail #debt-name:focus,
+#view-period-detail #debt-amount:focus {
+    border-color: rgba(245,158,11,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Ingresos — turquesa */
+#view-period-detail #new-inc-cat,
+#view-period-detail #new-inc-icon {
+    border: 1px solid rgba(45,212,191,.30) !important;
+}
+#view-period-detail #new-inc-cat:focus,
+#view-period-detail #new-inc-icon:focus {
+    border-color: rgba(45,212,191,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Gastos — rosa */
+#view-period-detail #new-exp-cat,
+#view-period-detail #new-exp-icon {
+    border: 1px solid rgba(251,113,133,.30) !important;
+}
+#view-period-detail #new-exp-cat:focus,
+#view-period-detail #new-exp-icon:focus {
+    border-color: rgba(251,113,133,.78) !important;
+    box-shadow: none !important;
+}
+
+/* Periodos/calendario/configuración — esmeralda */
+#view-period-detail #new-period-month,
+#view-period-detail #new-period-year,
+#view-period-detail #quick-calendar-select,
+#view-period-detail #cfg-user-name {
+    border: 1px solid rgba(52,211,153,.30) !important;
+}
+#view-period-detail #new-period-month:focus,
+#view-period-detail #new-period-year:focus,
+#view-period-detail #quick-calendar-select:focus,
+#view-period-detail #cfg-user-name:focus {
+    border-color: rgba(52,211,153,.78) !important;
+    box-shadow: none !important;
+}
+</style>
+<style id="sync-and-movements-final-clean">
+/* CORRECCIÓN FINAL — sincronización y bloques internos de Movimientos */
+#view-period-detail .fixed-redesign .fixed-sync-btn {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn > i {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-label {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 145px !important;
+    max-width: 145px !important;
+    flex: 0 0 145px !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    line-height: 1.1 !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-label > span {
+    display: block !important;
+    white-space: nowrap !important;
+}
+#view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-amount {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+}
+
+/* Los cinco bloques del formulario de Movimientos deben tener exactamente la misma altura. */
+#view-period-detail form[onsubmit="addTransaction(event)"] {
+    align-items: stretch !important;
+}
+#view-period-detail form[onsubmit="addTransaction(event)"] > div.flex.items-end {
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+}
+#view-period-detail form[onsubmit="addTransaction(event)"] .movement-register-btn {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    align-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 10px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    line-height: 1 !important;
+}
+#view-period-detail form[onsubmit="addTransaction(event)"] .movement-register-btn i {
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+}
+
+@media (max-width: 639px) {
+    #view-period-detail .fixed-redesign .fixed-sync-btn {
+        gap: 6px !important;
+    }
+    #view-period-detail .fixed-redesign .fixed-sync-btn .fixed-sync-label {
+        width: 145px !important;
+        max-width: 145px !important;
+        flex-basis: 145px !important;
+    }
+}
+</style>
+
+
+<style id="pasivos-section-typography-match-final">
+/* CONTROL DE PASIVOS — misma escala tipográfica que el módulo NUEVO COMPROMISO */
+#view-pasivos .pasivos-section-hero .nexus-module-eyebrow {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    letter-spacing: .14em !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-title {
+    font-size: 20px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.02em !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-desc {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    margin-top: 4px !important;
+}
+#view-pasivos .pasivos-section-hero .nexus-module-action-value {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+@media (max-width: 639px) {
+    #view-pasivos .pasivos-section-hero .nexus-module-title {
+        font-size: 20px !important;
+    }
+}
+</style>
+
+<style id="unified-interface-radius-final">
+/* GEOMETRÍA GLOBAL — una sola curvatura para controles y bloques de interfaz.
+   Se excluyen elementos circulares/píldora que dependen de su forma funcional. */
+:root {
+    --ui-radius: 14px;
+}
+
+/* Bloques / tarjetas */
+#app-scroll .rounded-2xl,
+#app-scroll .rounded-xl,
+#app-scroll .rounded-lg,
+#app-scroll .pasivos-module-card,
+#app-scroll .savings-entry-card,
+#app-scroll .savings-ledger-card,
+#app-scroll .fixed-entry-card,
+#app-scroll .fixed-ledger-card,
+#app-scroll #debts-cards-grid > div {
+    border-radius: var(--ui-radius) !important;
+}
+
+/* Inputs, selects y áreas de texto: un único contorno redondeado */
+#app-scroll input:not([type="checkbox"]):not([type="radio"]),
+#app-scroll select,
+#app-scroll textarea,
+#app-scroll .savings-money-field,
+#app-scroll .input-group,
+#app-scroll .form-control {
+    border-radius: var(--ui-radius) !important;
+}
+
+/* Botones y controles de acción */
+#app-scroll button:not(.rounded-full),
+#app-scroll .btn,
+#app-scroll .nexus-module-action,
+#app-scroll .nexus-module-action-btn,
+#app-scroll .savings-total-chip,
+#app-scroll .fixed-sync-chip,
+#app-scroll .fixed-sync-btn,
+#app-scroll .movement-register-btn {
+    border-radius: var(--ui-radius) !important;
+}
+
+/* Elementos internos de tarjetas que funcionan como casillas */
+#app-scroll #debts-cards-grid > div > div,
+#app-scroll .fixed-ledger-card #detail-fixed-records-list > div,
+#app-scroll .fixed-ledger-card > div.grid > div {
+    border-radius: var(--ui-radius) !important;
+}
+
+/* Iconos con fondo: mismo tamaño y misma curvatura */
+#app-scroll .nexus-module-icon,
+#app-scroll .section-icon-box {
+    border-radius: var(--ui-radius) !important;
+}
+
+/* CONTROL DE PASIVOS: el icono superior debe ser exactamente igual al del
+   bloque NUEVO COMPROMISO. */
+#app-scroll #view-pasivos .pasivos-section-hero .nexus-module-icon,
+#app-scroll #view-pasivos .pasivos-module-card:not(.pasivos-section-hero) .nexus-module-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    flex: 0 0 44px !important;
+    flex-basis: 44px !important;
+    border-radius: var(--ui-radius) !important;
+}
+
+@media (max-width: 639px) {
+    #app-scroll #view-pasivos .pasivos-section-hero .nexus-module-icon,
+    #app-scroll #view-pasivos .pasivos-module-card:not(.pasivos-section-hero) .nexus-module-icon {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        max-width: 44px !important;
+        max-height: 44px !important;
+        flex-basis: 44px !important;
+    }
+}
+</style>
+
+<style id="savings-section-header-match">
+/* CAJAS DE AHORROS — encabezado principal con la misma jerarquía visual de Pasivos. */
+#view-cajas .savings-section-hero .nexus-module-header {
+    min-height: 76px !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#view-cajas .savings-section-hero .nexus-module-header-main {
+    align-items: center !important;
+}
+#view-cajas .savings-section-hero .nexus-module-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    flex: 0 0 44px !important;
+}
+#view-cajas .savings-section-hero .nexus-module-eyebrow {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    letter-spacing: .14em !important;
+}
+#view-cajas .savings-section-hero .nexus-module-title {
+    font-size: 20px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.02em !important;
+}
+#view-cajas .savings-section-hero .nexus-module-desc {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    margin-top: 4px !important;
+}
+#view-cajas .savings-section-hero .nexus-module-action {
+    align-self: center !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+}
+#view-cajas .savings-section-hero .nexus-module-action-value {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+@media (max-width: 639px) {
+    #view-cajas .savings-section-hero .nexus-module-header {
+        min-height: 0 !important;
+    }
+    #view-cajas .savings-section-hero .nexus-module-header-main {
+        align-items: flex-start !important;
+    }
+    #view-cajas .savings-section-hero .nexus-module-title {
+        font-size: 20px !important;
+    }
+    #view-cajas .savings-section-hero .nexus-module-action {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+}
+</style>
+
+<style id="cajas-period-breakdown-and-colors">
+/* CAJAS DE AHORROS — desglose como módulo y colores independientes por caja. */
+#view-cajas .savings-period-breakdown-card {
+    border-radius: 14px !important;
+}
+#view-cajas .savings-breakdown-header {
+    margin: 0 0 16px 0 !important;
+    padding: 0 0 12px 0 !important;
+    min-height: 0 !important;
+    border-bottom: 0 !important;
+}
+#view-cajas .savings-breakdown-header .nexus-module-icon {
+    width: 44px !important; height: 44px !important;
+    min-width: 44px !important; min-height: 44px !important;
+    max-width: 44px !important; max-height: 44px !important;
+    flex: 0 0 44px !important;
+    border-radius: 14px !important;
+}
+#view-cajas .savings-breakdown-header .nexus-module-eyebrow { font-size:10px !important; line-height:1.2 !important; }
+#view-cajas .savings-breakdown-header .nexus-module-title { font-size:20px !important; line-height:1.15 !important; }
+#view-cajas .savings-breakdown-header .nexus-module-desc { font-size:12px !important; line-height:1.3 !important; margin-top:4px !important; }
+
+/* Las cajas conservan identidad cromática individual. */
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) { border-color: rgba(16,185,129,.58) !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1)::after { background: #10b981 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) { border-color: rgba(20,184,166,.58) !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) { border-color: rgba(6,182,212,.58) !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) { border-color: rgba(245,158,11,.58) !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) .fa-vault { color:#10b981 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) .fa-vault { color:#14b8a6 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) .fa-vault { color:#06b6d4 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) .fa-vault { color:#f59e0b !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) h3 { color:#34d399 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) h3 { color:#2dd4bf !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) h3 { color:#22d3ee !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) h3 { color:#fbbf24 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1) > .absolute { background:#10b981 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2) > .absolute { background:#14b8a6 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3) > .absolute { background:#06b6d4 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4) > .absolute { background:#f59e0b !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(1):hover { border-color:#10b981 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(2):hover { border-color:#14b8a6 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(3):hover { border-color:#06b6d4 !important; }
+#view-cajas #savings-boxes-grid > .savings-box-card:nth-child(4):hover { border-color:#f59e0b !important; }
+
+@media (max-width:639px) {
+  #view-cajas .savings-breakdown-header .nexus-module-header-main { align-items:center !important; }
+  #view-cajas .savings-breakdown-header .nexus-module-title { font-size:20px !important; }
 }
 </style>
